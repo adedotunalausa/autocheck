@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>AutoCheck</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark shadow"
+         style="background-color: #1b1717;">
+        <div>
+            <a href="#" class="navbar-brand">
+                AutoCheck </a>
+        </div>
+    </nav>
+</header>
+
+<div class="login-page">
+    <div class="headline-wrapper">
+        <h1 class="headline">Welcome to AutoCheck</h1>
+        <p>We exist to make your car healthy</p>
+        <img class="home-image" th:src="@{/images/social.svg}" alt="social">
+    </div>
+    <div class="form">
+        <form class="register-form" action="#" th:action="@{/add-user}" th:object="${user}" method="post">
+            <input type="text" th:field="*{firstname}" placeholder="firstname" required="required"/>
+            <input type="text" th:field="*{lastname}" placeholder="lastname" required="required"/>
+            <div style="display: flex; justify-content: space-around">
+                <div style="display: flex; align-items: center; width: 5rem">
+                    <label for="male">Male</label>
+                    <input style="margin-top: 7px" type="radio" th:value="Male" id="male" name="gender" required="required"/>
+                </div>
+                <div style="display: flex; align-items: center; width: 6rem">
+                    <label for="female">Female</label>
+                    <input style="margin-top: 7px" type="radio" th:value="Female" id="female" name="gender" required="required"/>
+                </div>
+            </div>
+            <select name="role" id="role" required="required">
+                <optgroup label="Role">
+                    <option th:value="Admin">Admin</option>
+                    <option th:value="Viewer">Viewer</option>
+                </optgroup>
+            </select>
+            <input type="text" th:field="*{address}" placeholder="address" required="required"/>
+            <input type="email" th:field="*{email}" placeholder="email address" required="required"/>
+            <input type="password" th:field="*{password}" placeholder="password" required="required"/>
+            <button type="submit">signup</button>
+            <p class="message">Already registered? <a href="#">Sign In</a></p>
+        </form>
+
+        <form class="login-form" action="#" th:action="@{/login}" th:object="${user}" method="post">
+            <input type="email" name="email" placeholder="email" required="required"/>
+            <input type="password" name="password" placeholder="password" required="required"/>
+            <button type="submit">login</button>
+            <p class="message">Not registered? <a href="#">Create an account</a></p>
+        </form>
+    </div>
+</div>
+
+<footer class="container">
+    <p>&copy; AutoCheck 2021</p>
+</footer>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/login.js}"></script>
+
+</body>
+</html>
