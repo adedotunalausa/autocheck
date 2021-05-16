@@ -33,4 +33,20 @@ public class CustomerServiceImpl implements CustomerService {
 
         return foundCustomer;
     }
+
+    @Override
+    public void updateCustomer(Long customerId, String firstname, String lastname, String gender, String occupation,
+                               String address, String city, String state, String email, String phoneNo) {
+        Customer customer = getCustomerById(customerId);
+        customer.setFirstname(firstname);
+        customer.setLastname(lastname);
+        customer.setGender(gender);
+        customer.setOccupation(occupation);
+        customer.setAddress(address);
+        customer.setCity(city);
+        customer.setState(state);
+        customer.setEmail(email);
+        customer.setPhoneNo(phoneNo);
+        customerRepository.save(customer);
+    }
 }

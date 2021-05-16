@@ -59,5 +59,16 @@ public class CustomerController {
         return "customerEditForm";
     }
 
+    @PostMapping("/update-customer")
+    private String updateCustomer(@ModelAttribute("currentCustomer") Customer currentCustomer, Model model) {
+        customerService.updateCustomer(currentCustomer.getCustomerId(), currentCustomer.getFirstname(),
+                currentCustomer.getLastname(), currentCustomer.getGender(), currentCustomer.getOccupation(),
+                currentCustomer.getAddress(), currentCustomer.getCity(), currentCustomer.getState(),
+                currentCustomer.getEmail(), currentCustomer.getPhoneNo());
+        Customer customer = customerService.getCustomerById(currentCustomer.getCustomerId());
+        model.addAttribute("currentCustomer", customer);
+        return "customerEditForm";
+    }
+
 
 }
