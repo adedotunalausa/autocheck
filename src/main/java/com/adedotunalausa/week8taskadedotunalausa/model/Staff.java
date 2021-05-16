@@ -24,6 +24,7 @@ public class Staff {
     protected String address;
     protected String email;
     protected String password;
+    private int isDeleted;
     private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
     public Staff(String firstname, String lastname, String gender, String role, String address, String email, String password) {

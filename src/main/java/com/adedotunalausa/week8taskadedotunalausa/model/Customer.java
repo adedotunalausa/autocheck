@@ -26,6 +26,7 @@ public class Customer {
     protected String state;
     protected String email;
     protected String phoneNo;
+    private int isDeleted;
     private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
     public Customer(String firstname, String lastname, String gender, String occupation,

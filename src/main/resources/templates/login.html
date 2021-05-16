@@ -4,33 +4,62 @@
     <meta charset="UTF-8">
     <title>AutoCheck</title>
 
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous">
+    <!-- Bootstrap core CSS     -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link th:href="@{/css/animate.min.css}" rel="stylesheet"/>
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link th:href="@{/css/light-bootstrap-dashboard.css?v=1.4.0}" rel="stylesheet"/>
 
     <link rel="stylesheet" th:href="@{/css/login.css}" />
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link th:href="@{/css/pe-icon-7-stroke.css}" rel="stylesheet" />
 
 </head>
 <body>
 
-<div class="login-page">
-    <div class="headline-wrapper">
-        <h1 class="headline">AutoCheck Service Manager</h1>
-        <p>Making auto management easier and better</p>
-        <img class="home-image" th:src="@{/images/vehicle.svg}" alt="vehicle">
-    </div>
-    <div class="form">
-        <form class="login-form" action="#" th:action="@{/login}" th:object="${staff}" method="post">
-            <input type="email" name="email" placeholder="email" required="required"/>
-            <input type="password" name="password" placeholder="password" required="required"/>
-            <button type="submit">login</button>
-        </form>
+<div style="height: 92vh">
+    <div class="login-page">
+        <div class="headline-wrapper">
+            <h1 class="headline">AutoCheck <br> Service Manager</h1>
+            <p>Making auto management easier and better</p>
+            <img class="home-image" th:src="@{/images/vehicle.svg}" alt="vehicle">
+        </div>
+        <div class="form">
+            <form class="login-form" action="#" th:action="@{/login}" th:object="${staff}" method="post">
+                <input type="email" name="email" placeholder="email" required="required"/>
+                <input type="password" name="password" placeholder="password" required="required"/>
+                <button type="submit">login</button>
+            </form>
+        </div>
     </div>
 </div>
 
-<footer class="container">
-    <p>&copy; AutoCheck 2021</p>
+<footer class="footer">
+    <div class="container-fluid">
+        <nav class="pull-left">
+            <ul>
+                <li>
+                    <a href="#">
+                        Support
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Documentation
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <p class="copyright pull-right">
+            &copy; <script>document.write(new Date().getFullYear())</script> <a th:href="@{/}">AutoCheck</a>
+        </p>
+    </div>
 </footer>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

@@ -8,17 +8,14 @@
     margin: auto;
 }
 
-.headline-wrapper {
-    margin-top: 2rem;
-}
-
 .headline {
     font-weight: 600;
     color: #1e1f26;
 }
 
 .home-image {
-    width: 20rem;
+    margin-top: 2rem;
+    width: 25rem;
 }
 
 .form {

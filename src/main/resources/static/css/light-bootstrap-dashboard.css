@@ -1270,7 +1270,7 @@ fieldset[disabled] .btn-neutral.active {
 }
 
 .table .td-actions {
-    min-width: 90px;
+    min-width: 120px;
 }
 
 .table > tbody > tr {

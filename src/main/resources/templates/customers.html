@@ -135,7 +135,6 @@
                   <th>State</th>
                   <th>Email</th>
                   <th>Phone no.</th>
-                  <th>Date Added</th>
                   </thead>
                   <tbody>
                   <tr th:if="${customers.size() > 0}" th:each="customer : ${customers}">
@@ -149,8 +148,10 @@
                     <td th:text="${customer.state}"></td>
                     <td th:text="${customer.email}"></td>
                     <td th:text="${customer.phoneNo}"></td>
-                    <td th:text="${customer.createdAt}"></td>
                     <td class="td-actions text-right">
+                      <button type="button" rel="tooltip" title="View Customer Details" class="btn btn-info btn-simple btn-xs">
+                        <i class="fa fa-info"></i>
+                      </button>
                       <button type="button" rel="tooltip" title="Edit Customer" class="btn btn-info btn-simple btn-xs">
                         <i class="fa fa-edit"></i>
                       </button>
@@ -215,7 +216,7 @@
             </li>
             <li>
               <a href="#">
-                Contact
+                Support
               </a>
             </li>
             <li>

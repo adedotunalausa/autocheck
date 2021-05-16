@@ -1,6 +1,7 @@
 package com.adedotunalausa.week8taskadedotunalausa.controller;
 
 import com.adedotunalausa.week8taskadedotunalausa.model.Staff;
+import com.adedotunalausa.week8taskadedotunalausa.service.CustomerService;
 import com.adedotunalausa.week8taskadedotunalausa.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ public class StaffController {
     @Autowired
     private StaffService staffService;
 
+    @Autowired
+    private CustomerService customerService;
+
     @GetMapping("/")
     public String viewAuthenticationPage(Model model) {
         Staff staff = new Staff();
@@ -27,6 +31,7 @@ public class StaffController {
 
     @GetMapping("/dashboard")
     public String viewDashboard(Model model) {
+        model.addAttribute("customers", customerService.getAllCustomers());
         return "dashboard";
     }
 
