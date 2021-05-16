@@ -11,12 +11,12 @@ import java.sql.Timestamp;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
-public class User {
+@Table(name = "staff")
+public class Staff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long staffId;
     protected String firstname;
     protected String lastname;
     protected String gender;
@@ -26,7 +26,7 @@ public class User {
     protected String password;
     private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
-    public User(String firstname, String lastname, String gender, String role, String address, String email, String password) {
+    public Staff(String firstname, String lastname, String gender, String role, String address, String email, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.gender = gender;

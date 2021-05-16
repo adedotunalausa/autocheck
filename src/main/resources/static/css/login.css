@@ -45,7 +45,7 @@
     font-size: 14px;
 }
 
-.form label {
+.form p {
     color: #4d4d4d;
     font-size: 14px;
 }
@@ -78,9 +78,9 @@
     color: #ce1212;
     text-decoration: none;
 }
-.form .register-form {
-    display: none;
-}
+/*.form .register-form {*/
+/*    display: none;*/
+/*}*/
 .container {
     position: relative;
     z-index: 1;

@@ -1,0 +1,246 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>AutoCheck | Staff</title>
+
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, staff-scalable=0' name='viewport' />
+  <meta name="viewport" content="width=device-width" />
+
+
+  <!-- Bootstrap core CSS     -->
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+
+  <!-- Animation library for notifications   -->
+  <link th:href="@{/css/animate.min.css}" rel="stylesheet"/>
+
+  <!--  Light Bootstrap Table core CSS    -->
+  <link th:href="@{/css/light-bootstrap-dashboard.css?v=1.4.0}" rel="stylesheet"/>
+
+  <link rel="stylesheet" th:href="@{/css/login.css}" />
+
+  <!--     Fonts and icons     -->
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+  <link th:href="@{/css/pe-icon-7-stroke.css}" rel="stylesheet" />
+
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="sidebar" data-color="purple" th:data-image="@{/images/sidebar-2.jpg}">
+
+    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+
+
+    <div class="sidebar-wrapper">
+      <div class="logo">
+        <a th:href="@{/dashboard}" class="simple-text">
+          AutoCheck
+        </a>
+      </div>
+
+      <ul class="nav">
+        <li>
+          <a th:href="@{/dashboard}">
+            <i class="fa fa-dashboard" aria-hidden="true"></i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/services}">
+            <i class="fa fa-wrench" aria-hidden="true"></i>
+            <p>Services</p>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/customers}">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p>Customers</p>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/vehicles}">
+            <i class="fa fa-car" aria-hidden="true"></i>
+            <p>Vehicles</p>
+          </a>
+        </li>
+        <li class="active">
+          <a th:href="@{/staff}">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p>Staff</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="main-panel">
+    <nav class="navbar navbar-default navbar-fixed">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" th:href="@{/staff}">Staff</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <p>
+                  Username
+                  <b class="caret"></b>
+                </p>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Profile</a></li>
+                <li><a th:href="@{/staff}">Add Staff</a></li>
+                <li class="divider"></li>
+                <li><a th:href="@{/sign-out}">Sign out</a></li>
+              </ul>
+            </li>
+            <li class="separator hidden-lg"></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="header">
+                <h4 class="title">Striped Table with Hover</h4>
+                <p class="category">Here is a subtitle for this table</p>
+              </div>
+              <div class="content table-responsive table-full-width">
+                <table class="table table-hover">
+                  <thead>
+                  <th>ID</th>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Gender</th>
+                  <th>Role</th>
+                  <th>Address</th>
+                  <th>Email</th>
+                  </thead>
+                  <tbody>
+                  <tr th:if="${staff.size() > 0}" th:each="member : ${staff}">
+                    <td th:text="${member.staffId}"></td>
+                    <td th:text="${member.firstname}"></td>
+                    <td th:text="${member.lastname}"></td>
+                    <td th:text="${member.gender}"></td>
+                    <td th:text="${member.role}"></td>
+                    <td th:text="${member.address}"></td>
+                    <td th:text="${member.email}"></td>
+                  </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-12">
+            <div class="card">
+              <div class="login-page">
+              <div class="header">
+                <h4 class="title">Add a staff member</h4>
+                <p class="category">The staff would have the credentials to perform <br> certain operations on the app based on their role</p>
+              </div>
+              <div class="form">
+                <form class="register-form" action="#" th:action="@{/add-staff}" th:object="${newStaff}" method="post">
+                  <input type="text" th:field="*{firstname}" placeholder="firstname" required="required"/>
+                  <input type="text" th:field="*{lastname}" placeholder="lastname" required="required"/>
+                  <div style="display: flex; justify-content: space-around">
+                    <div style="display: flex; align-items: center; width: 7rem">
+                      <p for="male">Male</p>
+                      <input style="margin-top: 7px" type="radio" th:value="Male" id="male" name="gender" required="required"/>
+                    </div>
+                    <div style="display: flex; align-items: center; width: 8rem">
+                      <p for="female">Female</p>
+                      <input style="margin-top: 7px" type="radio" th:value="Female" id="female" name="gender" required="required"/>
+                    </div>
+                  </div>
+                  <select style="color: #4d4d4d; font-size: 14px" name="role" id="role" required="required">
+                    <option selected disabled>role</option>
+                    <option th:value="Admin">admin</option>
+                    <option th:value="Viewer">viewer</option>
+                  </select>
+                  <input type="text" th:field="*{address}" placeholder="address" required="required"/>
+                  <input type="email" th:field="*{email}" placeholder="email address" required="required"/>
+                  <input type="password" th:field="*{password}" placeholder="password" required="required"/>
+                  <button type="submit">Add staff</button>
+                </form>
+              </div>
+            </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container-fluid">
+        <nav class="pull-left">
+          <ul>
+            <li>
+              <a th:href="@{/dashboard}">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                Contact
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                Documentation
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <p class="copyright pull-right">
+          &copy; <script>document.write(new Date().getFullYear())</script> <a th:href="@{/dashboard}">AutoCheck</a>
+        </p>
+      </div>
+    </footer>
+
+
+  </div>
+</div>
+
+
+</body>
+
+<!--   Core JS Files   -->
+<script th:src="@{/js/jquery.3.2.1.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+
+<!--  Charts Plugin -->
+<script th:src="@{/js/chartist.min.js}"></script>
+
+<!--  Notifications Plugin    -->
+<script th:src="@{/js/bootstrap-notify.js}"></script>
+
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+
+<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+<script th:src="@{/js/light-bootstrap-dashboard.js?v=1.4.0}"></script>
+
+
+</html>
