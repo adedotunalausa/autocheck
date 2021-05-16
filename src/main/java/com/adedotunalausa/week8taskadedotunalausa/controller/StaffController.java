@@ -30,23 +30,41 @@ public class StaffController {
     }
 
     @GetMapping("/dashboard")
-    public String viewDashboard(Model model) {
-        model.addAttribute("customers", customerService.getAllCustomers());
-        return "dashboard";
+    public String viewDashboard(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            model.addAttribute("customers", customerService.getAllCustomers());
+            return "dashboard";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/add-staff")
-    private String addStaff(@ModelAttribute("staff") Staff newStaff) {
-        staffService.addUser(newStaff);
-        return "redirect:/staff";
+    private String addStaff(@ModelAttribute("staff") Staff newStaff, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            staffService.addUser(newStaff);
+            return "redirect:/staff";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/staff")
-    private String viewStaffPage(Model model) {
-        Staff newStaff = new Staff();
-        model.addAttribute("newStaff", newStaff);
-        model.addAttribute("staff", staffService.getAllUsers());
-        return "staff";
+    private String viewStaffPage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            Staff newStaff = new Staff();
+            model.addAttribute("newStaff", newStaff);
+            model.addAttribute("staff", staffService.getAllUsers());
+            return "staff";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/login")
