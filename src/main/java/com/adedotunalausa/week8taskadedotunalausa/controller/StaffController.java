@@ -36,11 +36,6 @@ public class StaffController {
         return "redirect:/staff";
     }
 
-    @GetMapping("/customers")
-    private String viewCustomersPage() {
-        return "customers";
-    }
-
     @GetMapping("/staff")
     private String viewStaffPage(Model model) {
         Staff newStaff = new Staff();

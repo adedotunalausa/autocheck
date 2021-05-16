@@ -21,6 +21,8 @@
   <!--  Light Bootstrap Table core CSS    -->
   <link th:href="@{/css/light-bootstrap-dashboard.css?v=1.4.0}" rel="stylesheet"/>
 
+  <link rel="stylesheet" th:href="@{/css/login.css}" />
+
   <!--     Fonts and icons     -->
   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
@@ -93,10 +95,10 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <p>
-                  Username
+                <div style="display: flex; align-items: center">
+                  <p th:if="${session.containsKey('userFirstname')}" th:text="${session.userFirstname}"></p>
                   <b class="caret"></b>
-                </p>
+                </div>
               </a>
               <ul class="dropdown-menu">
                 <li><a href="#">Profile</a></li>
@@ -117,25 +119,37 @@
           <div class="col-md-12">
             <div class="card">
               <div class="header">
-                <h4 class="title">Striped Table with Hover</h4>
-                <p class="category">Here is a subtitle for this table</p>
+                <h4 class="title">List of Customers</h4>
+                <p class="category">Showing details of customers</p>
               </div>
               <div class="content table-responsive table-full-width">
                 <table class="table table-hover">
                   <thead>
                   <th>ID</th>
-                  <th>Name</th>
-                  <th>Salary</th>
-                  <th>Country</th>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Gender</th>
+                  <th>Occupation</th>
+                  <th>Address</th>
                   <th>City</th>
+                  <th>State</th>
+                  <th>Email</th>
+                  <th>Phone no.</th>
+                  <th>Date Added</th>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Dakota Rice</td>
-                    <td>$36,738</td>
-                    <td>Niger</td>
-                    <td>Oud-Turnhout</td>
+                  <tr th:if="${customers.size() > 0}" th:each="customer : ${customers}">
+                    <td th:text="${customer.customerId}"></td>
+                    <td th:text="${customer.firstname}"></td>
+                    <td th:text="${customer.lastname}"></td>
+                    <td th:text="${customer.gender}"></td>
+                    <td th:text="${customer.occupation}"></td>
+                    <td th:text="${customer.address}"></td>
+                    <td th:text="${customer.city}"></td>
+                    <td th:text="${customer.state}"></td>
+                    <td th:text="${customer.email}"></td>
+                    <td th:text="${customer.phoneNo}"></td>
+                    <td th:text="${customer.createdAt}"></td>
                     <td class="td-actions text-right">
                       <button type="button" rel="tooltip" title="Edit Customer" class="btn btn-info btn-simple btn-xs">
                         <i class="fa fa-edit"></i>
@@ -152,72 +166,39 @@
             </div>
           </div>
 
-
           <div class="col-md-12">
-            <div class="card card-plain">
-              <div class="header">
-                <h4 class="title">Table on Plain Background</h4>
-                <p class="category">Here is a subtitle for this table</p>
-              </div>
-              <div class="content table-responsive table-full-width">
-                <table class="table table-hover">
-                  <thead>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Salary</th>
-                  <th>Country</th>
-                  <th>City</th>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Dakota Rice</td>
-                    <td>$36,738</td>
-                    <td>Niger</td>
-                    <td>Oud-Turnhout</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Minerva Hooper</td>
-                    <td>$23,789</td>
-                    <td>Curaçao</td>
-                    <td>Sinaai-Waas</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Sage Rodriguez</td>
-                    <td>$56,142</td>
-                    <td>Netherlands</td>
-                    <td>Baileux</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Philip Chaney</td>
-                    <td>$38,735</td>
-                    <td>Korea, South</td>
-                    <td>Overland Park</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Doris Greene</td>
-                    <td>$63,542</td>
-                    <td>Malawi</td>
-                    <td>Feldkirchen in Kärnten</td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td>Mason Porter</td>
-                    <td>$78,615</td>
-                    <td>Chile</td>
-                    <td>Gloucester</td>
-                  </tr>
-                  </tbody>
-                </table>
-
+            <div class="card">
+              <div class="login-page">
+                <div class="header">
+                  <h4 class="title">Add a customer</h4>
+                  <p class="category">New customers are added to keep track of their car service history</p>
+                </div>
+                <div class="form">
+                  <form class="register-form" action="#" th:action="@{/add-customer}" th:object="${newCustomer}" method="post">
+                    <input type="text" th:field="*{firstname}" placeholder="firstname" required="required"/>
+                    <input type="text" th:field="*{lastname}" placeholder="lastname" required="required"/>
+                    <div style="display: flex; justify-content: space-around">
+                      <div style="display: flex; align-items: center; width: 7rem">
+                        <p for="male">Male</p>
+                        <input style="margin-top: 7px" type="radio" th:value="Male" id="male" name="gender" required="required"/>
+                      </div>
+                      <div style="display: flex; align-items: center; width: 8rem">
+                        <p for="female">Female</p>
+                        <input style="margin-top: 7px" type="radio" th:value="Female" id="female" name="gender" required="required"/>
+                      </div>
+                    </div>
+                    <input type="text" th:field="*{occupation}" placeholder="occupation" required="required"/>
+                    <input type="text" th:field="*{address}" placeholder="address" required="required"/>
+                    <input type="text" th:field="*{city}" placeholder="city" required="required"/>
+                    <input type="text" th:field="*{state}" placeholder="state" required="required"/>
+                    <input type="email" th:field="*{email}" placeholder="email address" required="required"/>
+                    <input type="text" th:field="*{phoneNo}" placeholder="phone no" required="required"/>
+                    <button type="submit">Add Customer</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-
 
         </div>
       </div>
