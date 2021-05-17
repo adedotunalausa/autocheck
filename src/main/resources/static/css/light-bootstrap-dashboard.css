@@ -653,8 +653,8 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .btn-success {
-    border-color: #87CB16;
-    color: #87CB16;
+    border-color: #2b542c;
+    color: #2b542c;
 }
 
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active,
@@ -672,12 +672,12 @@ fieldset[disabled] .btn-success.focus,
 fieldset[disabled] .btn-success:active,
 fieldset[disabled] .btn-success.active {
     background-color: transparent;
-    border-color: #87CB16;
+    border-color: #2b542c;
 }
 
 .btn-success.btn-fill {
     color: #FFFFFF;
-    background-color: #87CB16;
+    background-color: #2b542c;
     opacity: 1;
     filter: alpha(opacity=100);
 }
@@ -693,7 +693,7 @@ fieldset[disabled] .btn-success.active {
 }
 
 .btn-success .caret {
-    border-top-color: #87CB16;
+    border-top-color: #2b542c;
 }
 
 .btn-info {

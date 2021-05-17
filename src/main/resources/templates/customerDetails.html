@@ -135,7 +135,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>First Name</label>
-                        <input type="text" class="form-control" placeholder="Company" disabled th:value="${currentCustomer.firstname}">
+                        <input type="text" class="form-control" placeholder="First Name" disabled th:value="${currentCustomer.firstname}">
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -192,7 +192,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Phone No.</label>
-                        <input type="number" class="form-control" disabled placeholder="ZIP Code" th:value="${currentCustomer.phoneNo}">
+                        <input type="number" class="form-control" disabled placeholder="Phone No." th:value="${currentCustomer.phoneNo}">
                       </div>
                     </div>
                   </div>
@@ -210,23 +210,39 @@
                 <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
               </div>
               <div class="header">
-                <h4 style="text-align: center" class="title">Other Info</h4>
-                <div style="display: flex; align-items: center; justify-content: space-around">
                   <div style="display: flex; align-items: center" class="text-center">
-                    <p style="margin-right: 5px" class="description">Vehicles:</p>
-                    <p class="description" th:text="${currentCustomer.customerId}"></p>
+                    <h4 style="margin-right: 5px" class="title">Vehicle(s):</h4>
+                    <h4 class="title" th:text="${currentCustomerVehicles.size()}"></h4>
                   </div>
-                  <div style="display: flex; align-items: center" class="text-center">
-                    <p style="margin-right: 5px" class="description">Services:</p>
-                    <p class="description" >9</p>
-                  </div>
-                </div>
               </div>
-              <div class="text-center">
-              <hr>
-                <a href="#" class="btn btn-simple"> View Details &raquo;</a>
 
+              <div class="content table-responsive table-full-width">
+                <table class="table table-hover">
+                  <thead>
+                  <th>Make</th>
+                  <th>Model</th>
+                  <th>Year</th>
+                  <th>Color</th>
+                  </thead>
+                  <tbody>
+                  <tr th:if="${currentCustomerVehicles.size() > 0}" th:each="vehicle : ${currentCustomerVehicles}">
+                    <td th:text="${vehicle.manufacturer}"></td>
+                    <td th:text="${vehicle.model}"></td>
+                    <td th:text="${vehicle.year}"></td>
+                    <td th:text="${vehicle.color}"></td>
+                    <td class="text-right">
+                      <a rel="tooltip" title="View Vehicle Details" class="btn btn-info btn-simple btn-xs" th:href="@{'/view-vehicle?vehicleId=' + ${vehicle.vehicleId}}">
+                        <i class="fa fa-info"></i>
+                      </a>
+                      <a rel="tooltip" title="Edit Vehicle" class="btn btn-info btn-simple btn-xs" th:href="@{'/edit-vehicle?vehicleId=' + ${vehicle.vehicleId}}">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
               </div>
+
             </div>
           </div>
 

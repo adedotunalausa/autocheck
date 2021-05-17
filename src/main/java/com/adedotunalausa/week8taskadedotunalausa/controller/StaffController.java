@@ -3,6 +3,7 @@ package com.adedotunalausa.week8taskadedotunalausa.controller;
 import com.adedotunalausa.week8taskadedotunalausa.model.Staff;
 import com.adedotunalausa.week8taskadedotunalausa.service.CustomerService;
 import com.adedotunalausa.week8taskadedotunalausa.service.StaffService;
+import com.adedotunalausa.week8taskadedotunalausa.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,9 @@ public class StaffController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private VehicleService vehicleService;
+
     @GetMapping("/")
     public String viewAuthenticationPage(Model model) {
         Staff staff = new Staff();
@@ -35,6 +39,7 @@ public class StaffController {
         Long userId = (Long) session.getAttribute("userId");
         if (userId != null) {
             model.addAttribute("customers", customerService.getAllCustomers());
+            model.addAttribute("vehicles", vehicleService.getAllVehicles());
             return "dashboard";
         } else {
             return "redirect:/";

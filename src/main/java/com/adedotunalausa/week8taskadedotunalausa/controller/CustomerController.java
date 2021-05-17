@@ -1,7 +1,9 @@
 package com.adedotunalausa.week8taskadedotunalausa.controller;
 
 import com.adedotunalausa.week8taskadedotunalausa.model.Customer;
+import com.adedotunalausa.week8taskadedotunalausa.model.Vehicle;
 import com.adedotunalausa.week8taskadedotunalausa.service.CustomerService;
+import com.adedotunalausa.week8taskadedotunalausa.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private VehicleService vehicleService;
 
     @GetMapping("/customers")
     private String viewCustomersPage(Model model, HttpServletRequest request) {
@@ -28,6 +34,19 @@ public class CustomerController {
             model.addAttribute("newCustomer", newCustomer);
             model.addAttribute("customers", customerService.getAllCustomers());
             return "customers";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/add-customer")
+    private String showCustomerAddForm(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            Customer newCustomer = new Customer();
+            model.addAttribute("newCustomer", newCustomer);
+            return "customerAddForm";
         } else {
             return "redirect:/";
         }
@@ -48,7 +67,9 @@ public class CustomerController {
     @GetMapping("/view-customer")
     private String showCustomerDetailsPage(@RequestParam Long customerId, Model model) {
         Customer currentCustomer = customerService.getCustomerById(customerId);
+        List<Vehicle> currentCustomerVehicles = vehicleService.getAllVehiclesByCustomerId(customerId);
         model.addAttribute("currentCustomer", currentCustomer);
+        model.addAttribute("currentCustomerVehicles", currentCustomerVehicles);
         return "customerDetails";
     }
 
