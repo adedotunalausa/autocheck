@@ -4,6 +4,7 @@ import com.adedotunalausa.week8taskadedotunalausa.model.Customer;
 import com.adedotunalausa.week8taskadedotunalausa.model.Vehicle;
 import com.adedotunalausa.week8taskadedotunalausa.service.CustomerService;
 import com.adedotunalausa.week8taskadedotunalausa.service.VehicleService;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,6 +73,24 @@ public class VehicleController {
         model.addAttribute("currentVehicle", currentVehicle);
         model.addAttribute("currentVehicleOwner", currentVehicle.getCustomer());
         return "vehicleDetails";
+    }
+
+    @GetMapping("/edit-vehicle")
+    private String showVehicleEditForm(@RequestParam Long vehicleId, Model model) {
+        Vehicle currentVehicle = vehicleService.getVehicleById(vehicleId);
+        model.addAttribute("currentVehicle", currentVehicle);
+        return "vehicleEditForm";
+    }
+
+    @PostMapping("/update-vehicle")
+    private String updateVehicle(@ModelAttribute("currentVehicle") Vehicle currentVehicle, Model model) {
+        vehicleService.updateVehicle(currentVehicle.getVehicleId(), currentVehicle.getManufacturer(),
+                currentVehicle.getModel(), currentVehicle.getColor(), currentVehicle.getYear(),
+                currentVehicle.getRegistrationNumber(), currentVehicle.getEngineNumber(),
+                currentVehicle.getChassisNumber(), currentVehicle.getCurrentMileage());
+        Vehicle vehicle = vehicleService.getVehicleById(currentVehicle.getVehicleId());
+        model.addAttribute("currentVehicle", vehicle);
+        return "vehicleEditForm";
     }
 
 }

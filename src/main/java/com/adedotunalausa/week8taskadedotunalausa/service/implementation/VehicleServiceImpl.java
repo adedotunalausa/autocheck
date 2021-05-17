@@ -43,4 +43,19 @@ public class VehicleServiceImpl implements VehicleService {
 
         return vehicle;
     }
+
+    @Override
+    public void updateVehicle(Long vehicleId, String manufacturer, String model, String color, String year, String registrationNumber,
+                              String engineNumber, String chassisNumber, String currentMileage) {
+        Vehicle vehicle = getVehicleById(vehicleId);
+        vehicle.setManufacturer(manufacturer);
+        vehicle.setModel(model);
+        vehicle.setColor(color);
+        vehicle.setYear(year);
+        vehicle.setRegistrationNumber(registrationNumber);
+        vehicle.setEngineNumber(engineNumber);
+        vehicle.setChassisNumber(chassisNumber);
+        vehicle.setCurrentMileage(currentMileage);
+        vehicleRepository.save(vehicle);
+    }
 }
