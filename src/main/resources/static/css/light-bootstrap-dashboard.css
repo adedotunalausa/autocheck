@@ -1118,6 +1118,10 @@ fieldset[disabled] .btn-neutral.active {
     cursor: not-allowed;
 }
 
+.required {
+    color: #810000;
+}
+
 .input-group-btn .btn {
     border-width: 1px;
     padding: 9px 16px;
@@ -2415,7 +2419,8 @@ fieldset[disabled] .btn-neutral.active {
 }
 
 .card-user hr,
-.card-price hr {
+.card-price hr,
+.customer-hr {
     margin: 5px 15px;
 }
 

@@ -113,7 +113,7 @@
     </nav>
 
     <div class="content">
-      <a th:href="@{/customers}" class="btn btn-simple"><- Go Back</a>
+      <a th:href="@{/customers}" class="btn btn-simple"><- Back to Customers</a>
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-8">
@@ -128,13 +128,13 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Manufacturer</label>
+                        <label>Manufacturer <span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder="Manufacturer" th:field="*{manufacturer}" required="required">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Model</label>
+                        <label>Model <span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder="Model" th:field="*{model}" required="required">
                       </div>
                     </div>
@@ -143,19 +143,19 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>Color</label>
+                        <label>Color <span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder="Color" th:field="*{color}" required="required">
                       </div>
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label>Year</label>
+                        <label>Year <span class="required">*</span></label>
                         <input type="number" class="form-control" placeholder="Year" th:field="*{year}" required="required">
                       </div>
                     </div>
                     <div class="col-md-5">
                       <div class="form-group">
-                        <label>Mileage</label>
+                        <label>Mileage <span class="required">*</span></label>
                         <input type="number" class="form-control" placeholder="Mileage" th:field="*{currentMileage}" required="required">
                       </div>
                     </div>
@@ -164,13 +164,13 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Chassis Number</label>
+                        <label>Chassis Number <span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder="Chassis Number" th:field="*{chassisNumber}" required="required">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Registration Number</label>
+                        <label>Registration Number <span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder="Registration Number" th:field="*{registrationNumber}" required="required">
                       </div>
                     </div>
@@ -179,7 +179,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label>Engine Number</label>
+                        <label>Engine Number <span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder="Engine Number" th:field="*{engineNumber}" required="required">
                       </div>
                     </div>

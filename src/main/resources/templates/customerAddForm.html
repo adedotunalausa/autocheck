@@ -127,13 +127,13 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>First Name</label>
+                        <label>First Name <span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder="First Name" th:field="*{firstname}" required="required">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Last Name</label>
+                        <label>Last Name <span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder="Last Name" th:field="*{lastname}" required="required">
                       </div>
                     </div>
@@ -142,13 +142,13 @@
                   <div class="row">
                     <div class="col-md-5">
                       <div class="form-group">
-                        <label>Occupation</label>
+                        <label>Occupation <span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder="Occupation" th:field="*{occupation}" required="required">
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
-                        <label>Gender</label>
+                        <label>Gender <span class="required">*</span></label>
                         <select class="form-control" name="gender" th:field="*{gender}" required="required">
                           <option th:value="Male">Male</option>
                           <option th:value="Female">Female</option>
@@ -157,7 +157,7 @@
                     </div>
                     <div class="col-md-5">
                       <div class="form-group">
-                        <label>Email address</label>
+                        <label>Email address <span class="required">*</span></label>
                         <input type="email" class="form-control" placeholder="Email" th:field="*{email}" required="required">
                       </div>
                     </div>
@@ -166,7 +166,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label>Address</label>
+                        <label>Address <span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder="Address" th:field="*{address}" required="required">
                       </div>
                     </div>
@@ -175,19 +175,19 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>City</label>
+                        <label>City <span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder="City" th:field="*{city}" required="required">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>State</label>
+                        <label>State <span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder="State" th:field="*{state}" required="required">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>Phone No.</label>
+                        <label>Phone No. <span class="required">*</span></label>
                         <input type="number" class="form-control" placeholder="Phone No." th:field="*{phoneNo}" required="required">
                       </div>
                     </div>

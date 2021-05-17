@@ -8,4 +8,5 @@ public interface VehicleService {
     void addVehicle(Vehicle vehicle);
     List<Vehicle> getAllVehicles();
     List<Vehicle> getAllVehiclesByCustomerId(Long customerId);
+    Vehicle getVehicleById(Long vehicleId);
 }

@@ -113,7 +113,7 @@
     </nav>
 
     <div class="content">
-      <a th:href="@{/customers}" class="btn btn-simple"><- Go Back</a>
+      <a th:href="@{'/view-customer?customerId=' + ${currentCustomer.customerId}}" class="btn btn-simple"><- Back to Customer Details</a>
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-8">

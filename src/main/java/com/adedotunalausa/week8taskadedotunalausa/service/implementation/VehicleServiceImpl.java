@@ -33,4 +33,14 @@ public class VehicleServiceImpl implements VehicleService {
                 .collect(Collectors.toList());
         return allVehiclesWithCustomerId;
     }
+
+    @Override
+    public Vehicle getVehicleById(Long vehicleId) {
+        Vehicle vehicle = null;
+        if (this.vehicleRepository.findById(vehicleId).isPresent()) {
+            vehicle = this.vehicleRepository.findById(vehicleId).get();
+        }
+
+        return vehicle;
+    }
 }

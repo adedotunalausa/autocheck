@@ -151,9 +151,9 @@
                                             <a rel="tooltip" title="Edit Vehicle" class="btn btn-info btn-simple btn-xs" th:href="@{'/edit-vehicle?vehicleId=' + ${vehicle.vehicleId}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <button type="button" rel="tooltip" title="Delete" class="btn btn-danger btn-simple btn-xs">
-                                                <i class="fa fa-times"></i>
-                                            </button>
+                                            <a rel="tooltip" title="Add Service" class="btn btn-success btn-simple btn-xs" th:href="@{'/add-service?vehicleId=' + ${vehicle.vehicleId}}">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                     </tbody>
