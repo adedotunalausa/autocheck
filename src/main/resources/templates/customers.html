@@ -8,7 +8,7 @@
 
   <title>AutoCheck | Customers</title>
 
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, staff-scalable=0' name='viewport' />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, employee-scalable=0' name='viewport' />
   <meta name="viewport" content="width=device-width" />
 
 
@@ -102,7 +102,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li><a href="#">Profile</a></li>
-                <li><a th:href="@{/staff}">Add Staff</a></li>
+                <li th:if="${session.userRole.equals('Admin')}"><a th:href="@{/add-employee}">Add Employee</a></li>
                 <li class="divider"></li>
                 <li><a th:href="@{/sign-out}">Sign out</a></li>
               </ul>
@@ -149,10 +149,10 @@
                       <a rel="tooltip" title="View Customer Details" class="btn btn-info btn-simple btn-xs" th:href="@{'/view-customer?customerId=' + ${customer.customerId}}">
                         <i class="fa fa-info"></i>
                       </a>
-                      <a rel="tooltip" title="Edit Customer" class="btn btn-info btn-simple btn-xs" th:href="@{'/edit-customer?customerId=' + ${customer.customerId}}">
+                      <a rel="tooltip" title="Edit Customer" class="btn btn-info btn-simple btn-xs" th:if="${session.userRole.equals('Admin')}" th:href="@{'/edit-customer?customerId=' + ${customer.customerId}}">
                         <i class="fa fa-edit"></i>
                       </a>
-                      <a rel="tooltip" title="Add Vehicle" class="btn btn-success btn-simple btn-xs" th:href="@{'/add-vehicle?customerId=' + ${customer.customerId}}">
+                      <a rel="tooltip" title="Add Vehicle" class="btn btn-success btn-simple btn-xs" th:if="${session.userRole.equals('Admin')}" th:href="@{'/add-vehicle?customerId=' + ${customer.customerId}}">
                         <i class="fa fa-plus"></i>
                       </a>
                     </td>

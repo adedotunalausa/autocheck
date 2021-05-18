@@ -1,8 +1,8 @@
 package com.adedotunalausa.week8taskadedotunalausa.controller;
 
-import com.adedotunalausa.week8taskadedotunalausa.model.Staff;
+import com.adedotunalausa.week8taskadedotunalausa.model.Employee;
 import com.adedotunalausa.week8taskadedotunalausa.service.CustomerService;
-import com.adedotunalausa.week8taskadedotunalausa.service.StaffService;
+import com.adedotunalausa.week8taskadedotunalausa.service.EmployeeService;
 import com.adedotunalausa.week8taskadedotunalausa.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class StaffController {
+public class EmployeeController {
     @Autowired
-    private StaffService staffService;
+    private EmployeeService employeeService;
 
     @Autowired
     private CustomerService customerService;
@@ -28,8 +28,8 @@ public class StaffController {
 
     @GetMapping("/")
     public String viewAuthenticationPage(Model model) {
-        Staff staff = new Staff();
-        model.addAttribute("staff", staff);
+        Employee employee = new Employee();
+        model.addAttribute("staff", employee);
         return "login";
     }
 
@@ -46,12 +46,25 @@ public class StaffController {
         }
     }
 
-    @PostMapping("/add-staff")
-    private String addStaff(@ModelAttribute("staff") Staff newStaff, HttpServletRequest request) {
+    @GetMapping("/add-employee")
+    private String showEmployeeAddForm(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
         if (userId != null) {
-            staffService.addUser(newStaff);
+            Employee newEmployee = new Employee();
+            model.addAttribute("newEmployee", newEmployee);
+            return "employeeAddForm";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @PostMapping("/add-employee")
+    private String addEmployee(@ModelAttribute("staff") Employee newEmployee, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            employeeService.addUser(newEmployee);
             return "redirect:/staff";
         } else {
             return "redirect:/";
@@ -63,9 +76,7 @@ public class StaffController {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
         if (userId != null) {
-            Staff newStaff = new Staff();
-            model.addAttribute("newStaff", newStaff);
-            model.addAttribute("staff", staffService.getAllUsers());
+            model.addAttribute("staff", employeeService.getAllUsers());
             return "staff";
         } else {
             return "redirect:/";
@@ -73,15 +84,15 @@ public class StaffController {
     }
 
     @PostMapping("/login")
-    private String login(@ModelAttribute("user") Staff staff, HttpServletRequest request) {
-        Staff returningStaff = staffService.getUser(staff.getEmail(), staff.getPassword());
+    private String login(@ModelAttribute("user") Employee employee, HttpServletRequest request) {
+        Employee returningEmployee = employeeService.getUser(employee.getEmail(), employee.getPassword());
 
-        if (returningStaff != null) {
+        if (returningEmployee != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("userId", returningStaff.getStaffId());
-            session.setAttribute("userFirstname", returningStaff.getFirstname());
-            session.setAttribute("userLastname", returningStaff.getLastname());
-            session.setAttribute("userRole", returningStaff.getRole());
+            session.setAttribute("userId", returningEmployee.getEmployeeId());
+            session.setAttribute("userFirstname", returningEmployee.getFirstname());
+            session.setAttribute("userLastname", returningEmployee.getLastname());
+            session.setAttribute("userRole", returningEmployee.getRole());
 
             return "redirect:/dashboard";
         } else {

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>AutoCheck</title>
+    <title>AutoCheck | Login</title>
 
     <!-- Bootstrap core CSS     -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
@@ -31,7 +31,7 @@
             <img class="home-image" th:src="@{/images/vehicle.svg}" alt="vehicle">
         </div>
         <div class="form">
-            <form class="login-form" action="#" th:action="@{/login}" th:object="${staff}" method="post">
+            <form class="login-form" action="#" th:action="@{/login}" th:object="${employee}" method="post">
                 <input type="email" name="email" placeholder="email" required="required"/>
                 <input type="password" name="password" placeholder="password" required="required"/>
                 <button type="submit">login</button>

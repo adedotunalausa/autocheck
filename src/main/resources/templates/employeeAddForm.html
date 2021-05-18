@@ -5,7 +5,7 @@
   <link rel="icon" type="image/png" href="assets/img/favicon.ico">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-  <title>AutoCheck | Customer Details</title>
+  <title>AutoCheck | Add Staff Member</title>
 
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, employee-scalable=0' name='viewport' />
   <meta name="viewport" content="width=device-width" />
@@ -56,7 +56,7 @@
             <p>Services</p>
           </a>
         </li>
-        <li class="active">
+        <li>
           <a th:href="@{/customers}">
             <i class="fa fa-users" aria-hidden="true"></i>
             <p>Customers</p>
@@ -68,7 +68,7 @@
             <p>Vehicles</p>
           </a>
         </li>
-        <li>
+        <li class="active">
           <a th:href="@{/staff}">
             <i class="fa fa-users" aria-hidden="true"></i>
             <p>Staff</p>
@@ -88,7 +88,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" th:href="@{/customers}">Customers</a>
+          <a class="navbar-brand" th:href="@{/staff}">Staff</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -113,56 +113,55 @@
     </nav>
 
     <div class="content">
-      <a th:href="@{/customers}" class="btn btn-simple"><- Back to Customers</a>
+      <a th:href="@{/staff}" class="btn btn-simple"><- Back to Staff</a>
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-8">
             <div class="card">
               <div class="header">
-                <h4 class="title">Customer Profile</h4>
-                <div style="display: flex; align-items: center">
-                  <p style="margin-right: 5px" class="description">Id:</p>
-                  <p class="description" th:text="${currentCustomer.customerId}"></p>
-                </div>
-                <div style="display: flex; align-items: center">
-                  <p style="margin-right: 5px" class="description">Date Created:</p>
-                  <p class="description" th:text="${currentCustomer.createdAt}"></p>
-                </div>
+                <h4 class="title">Add Employee</h4>
+                <p class="description">The employee member would have the credentials to perform <br> certain operations on the app based on their role</p>
               </div>
               <div class="content">
-                <form>
+                <form th:action="@{/add-employee}" th:object="${newEmployee}" method="post">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" class="form-control" placeholder="First Name" disabled th:value="${currentCustomer.firstname}">
+                        <label>First Name <span class="required">*</span></label>
+                        <input type="text" class="form-control" placeholder="First Name" th:field="*{firstname}" required="required">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" class="form-control" disabled placeholder="Last Name" th:value="${currentCustomer.lastname}">
+                        <label>Last Name <span class="required">*</span></label>
+                        <input type="text" class="form-control" placeholder="Last Name" th:field="*{lastname}" required="required">
                       </div>
                     </div>
                   </div>
 
                   <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                       <div class="form-group">
-                        <label>Occupation</label>
-                        <input type="text" class="form-control" disabled placeholder="Occupation" th:value="${currentCustomer.occupation}">
+                        <label>Gender <span class="required">*</span></label>
+                        <select class="form-control" name="gender" th:field="*{gender}" required="required">
+                          <option th:value="Male">Male</option>
+                          <option th:value="Female">Female</option>
+                        </select>
                       </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                       <div class="form-group">
-                        <label>Gender</label>
-                        <input type="text" class="form-control" disabled placeholder="Gender" th:value="${currentCustomer.gender}">
+                        <label>Role <span class="required">*</span></label>
+                        <select class="form-control" name="role" th:field="*{role}" required="required">
+                          <option th:value="Admin">Admin</option>
+                          <option th:value="Viewer">Viewer</option>
+                        </select>
                       </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                       <div class="form-group">
-                        <label>Email address</label>
-                        <input type="email" class="form-control" disabled placeholder="Email" th:value="${currentCustomer.email}">
+                        <label>Position <span class="required">*</span></label>
+                        <input type="text" class="form-control" placeholder="Position" th:field="*{position}" required="required">
                       </div>
                     </div>
                   </div>
@@ -170,8 +169,8 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label>Address</label>
-                        <input type="text" class="form-control" disabled placeholder="Address" th:value="${currentCustomer.address}">
+                        <label>Address <span class="required">*</span></label>
+                        <input type="text" class="form-control" placeholder="Address" th:field="*{address}" required="required">
                       </div>
                     </div>
                   </div>
@@ -179,70 +178,43 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>City</label>
-                        <input type="text" class="form-control" disabled placeholder="City" th:value="${currentCustomer.city}">
+                        <label>City <span class="required">*</span></label>
+                        <input type="text" class="form-control" placeholder="City" th:field="*{city}" required="required">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>State</label>
-                        <input type="text" class="form-control" disabled placeholder="State" th:value="${currentCustomer.state}">
+                        <label>State <span class="required">*</span></label>
+                        <input type="text" class="form-control" placeholder="State" th:field="*{state}" required="required">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>Phone No.</label>
-                        <input type="number" class="form-control" disabled placeholder="Phone No." th:value="${currentCustomer.phoneNo}">
+                        <label>Phone No. <span class="required">*</span></label>
+                        <input type="number" class="form-control" placeholder="Phone No." th:field="*{phoneNo}" required="required">
                       </div>
                     </div>
                   </div>
 
-                  <a class="btn btn-info btn-fill pull-right" th:if="${session.userRole.equals('Admin')}" th:href="@{'/edit-customer?customerId=' + ${currentCustomer.customerId}}">Edit Profile</a>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Email address <span class="required">*</span></label>
+                        <input type="email" class="form-control" placeholder="Email" th:field="*{email}" required="required">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Password <span class="required">*</span></label>
+                        <input type="password" class="form-control" placeholder="Password" th:field="*{password}" required="required">
+                      </div>
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-info btn-fill pull-right">Add Employee</button>
                   <div class="clearfix"></div>
                 </form>
               </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="card">
-              <div style="height: 4rem" class="image">
-                <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
-              </div>
-              <div class="header">
-                  <div style="display: flex; align-items: center" class="text-center">
-                    <h4 style="margin-right: 5px" class="title">Vehicle(s):</h4>
-                    <h4 class="title" th:text="${currentCustomerVehicles.size()}"></h4>
-                  </div>
-              </div>
-
-              <div class="content table-responsive table-full-width">
-                <table class="table table-hover">
-                  <thead>
-                  <th>Make</th>
-                  <th>Model</th>
-                  <th>Year</th>
-                  <th>Color</th>
-                  </thead>
-                  <tbody>
-                  <tr th:if="${currentCustomerVehicles.size() > 0}" th:each="vehicle : ${currentCustomerVehicles}">
-                    <td th:text="${vehicle.manufacturer}"></td>
-                    <td th:text="${vehicle.model}"></td>
-                    <td th:text="${vehicle.year}"></td>
-                    <td th:text="${vehicle.color}"></td>
-                    <td class="text-right">
-                      <a rel="tooltip" title="View Vehicle Details" class="btn btn-info btn-simple btn-xs" th:href="@{'/view-vehicle?vehicleId=' + ${vehicle.vehicleId}}">
-                        <i class="fa fa-info"></i>
-                      </a>
-                      <a rel="tooltip" title="Edit Vehicle" class="btn btn-info btn-simple btn-xs" th:if="${session.userRole.equals('Admin')}" th:href="@{'/edit-vehicle?vehicleId=' + ${vehicle.vehicleId}}">
-                        <i class="fa fa-edit"></i>
-                      </a>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-
             </div>
           </div>
 

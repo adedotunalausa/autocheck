@@ -8,7 +8,7 @@
 
   <title>AutoCheck | Staff</title>
 
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, staff-scalable=0' name='viewport' />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, employee-scalable=0' name='viewport' />
   <meta name="viewport" content="width=device-width" />
 
 
@@ -102,7 +102,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li><a href="#">Profile</a></li>
-                <li><a th:href="@{/staff}">Add Staff</a></li>
+                <li th:if="${session.userRole.equals('Admin')}"><a th:href="@{/add-employee}">Add Employee</a></li>
                 <li class="divider"></li>
                 <li><a th:href="@{/sign-out}">Sign out</a></li>
               </ul>
@@ -117,10 +117,11 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
+            <a style="margin-bottom: 2rem" th:href="@{/add-employee}" class="btn btn-fill btn-success ">Add a Staff Member</a>
             <div class="card">
               <div class="header">
-                <h4 class="title">List of staff</h4>
-                <p class="category">Showing list of staff authorized to use the app</p>
+                <h4 class="title">List of employee</h4>
+                <p class="category">Showing list of employee authorized to use the app</p>
               </div>
               <div class="content table-responsive table-full-width">
                 <table class="table table-hover">
@@ -130,17 +131,19 @@
                   <th>Lastname</th>
                   <th>Gender</th>
                   <th>Role</th>
-                  <th>Address</th>
+                  <th>Position</th>
+                  <th>Phone No.</th>
                   <th>Email</th>
                   </thead>
                   <tbody>
                   <tr th:if="${staff.size() > 0}" th:each="member : ${staff}">
-                    <td th:text="${member.staffId}"></td>
+                    <td th:text="${member.employeeId}"></td>
                     <td th:text="${member.firstname}"></td>
                     <td th:text="${member.lastname}"></td>
                     <td th:text="${member.gender}"></td>
                     <td th:text="${member.role}"></td>
-                    <td th:text="${member.address}"></td>
+                    <td th:text="${member.position}"></td>
+                    <td th:text="${member.phoneNo}"></td>
                     <td th:text="${member.email}"></td>
                   </tr>
                   </tbody>
@@ -149,44 +152,6 @@
               </div>
             </div>
           </div>
-
-
-          <div class="col-md-12">
-            <div class="card">
-              <div class="login-page">
-              <div class="header">
-                <h4 class="title">Add a staff member</h4>
-                <p class="category">The staff would have the credentials to perform <br> certain operations on the app based on their role</p>
-              </div>
-              <div class="form">
-                <form class="register-form" action="#" th:action="@{/add-staff}" th:object="${newStaff}" method="post">
-                  <input type="text" th:field="*{firstname}" placeholder="firstname" required="required"/>
-                  <input type="text" th:field="*{lastname}" placeholder="lastname" required="required"/>
-                  <div style="display: flex; justify-content: space-around">
-                    <div style="display: flex; align-items: center; width: 7rem">
-                      <p for="male">Male</p>
-                      <input style="margin-top: 7px" type="radio" th:value="Male" id="male" name="gender" required="required"/>
-                    </div>
-                    <div style="display: flex; align-items: center; width: 8rem">
-                      <p for="female">Female</p>
-                      <input style="margin-top: 7px" type="radio" th:value="Female" id="female" name="gender" required="required"/>
-                    </div>
-                  </div>
-                  <select style="color: #4d4d4d; font-size: 14px" name="role" id="role" required="required">
-                    <option selected disabled>role</option>
-                    <option th:value="Admin">admin</option>
-                    <option th:value="Viewer">viewer</option>
-                  </select>
-                  <input type="text" th:field="*{address}" placeholder="address" required="required"/>
-                  <input type="email" th:field="*{email}" placeholder="email address" required="required"/>
-                  <input type="password" th:field="*{password}" placeholder="password" required="required"/>
-                  <button type="submit">Add staff</button>
-                </form>
-              </div>
-            </div>
-            </div>
-          </div>
-
 
         </div>
       </div>

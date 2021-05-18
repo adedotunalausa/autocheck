@@ -8,7 +8,7 @@
 
     <title>AutoCheck | Dashboard</title>
 
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, staff-scalable=0' name='viewport' />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, employee-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
 
@@ -98,7 +98,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Profile</a></li>
-                                <li><a th:href="@{/staff}">Add Staff</a></li>
+                                <li th:if="${session.userRole.equals('Admin')}"><a th:href="@{/add-employee}">Add Employee</a></li>
                                 <li class="divider"></li>
                                 <li><a th:href="@{/sign-out}">Sign out</a></li>
                             </ul>
