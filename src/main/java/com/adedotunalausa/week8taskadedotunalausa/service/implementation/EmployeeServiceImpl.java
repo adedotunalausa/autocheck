@@ -24,6 +24,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Employee getUserById(Long userId) {
+        Employee foundEmployee = null;
+        if (employeeRepository.findById(userId).isPresent()) {
+            foundEmployee = employeeRepository.findById(userId).get();
+        }
+        return foundEmployee;
+    }
+
+    @Override
     public List<Employee> getAllUsers() {
         return employeeRepository.findAll();
     }
