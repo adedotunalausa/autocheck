@@ -18,7 +18,7 @@ public class Work {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long serviceId;
+    protected Long workId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "vehicleId", nullable = false)

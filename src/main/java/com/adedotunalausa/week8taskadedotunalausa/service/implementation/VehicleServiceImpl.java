@@ -28,10 +28,9 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public List<Vehicle> getAllVehiclesByCustomerId(Long customerId) {
         List<Vehicle> allVehicles = this.vehicleRepository.findAllByIsDeletedEqualsOrderByCreatedAtDesc(0);
-        List<Vehicle> allVehiclesWithCustomerId = allVehicles.stream()
+        return allVehicles.stream()
                 .filter(x -> x.getCustomer().getCustomerId().equals(customerId))
                 .collect(Collectors.toList());
-        return allVehiclesWithCustomerId;
     }
 
     @Override

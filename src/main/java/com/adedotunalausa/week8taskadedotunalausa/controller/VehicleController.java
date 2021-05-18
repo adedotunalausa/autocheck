@@ -27,7 +27,7 @@ public class VehicleController {
     private CustomerService customerService;
 
     @GetMapping("/vehicles")
-    private String viewVehiclePage(Model model, HttpServletRequest request) {
+    private String viewVehiclesPage(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
         if (userId != null) {

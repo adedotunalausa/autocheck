@@ -30,6 +30,18 @@ public class WorkController {
     @Autowired
     private EmployeeService employeeService;
 
+    @GetMapping("/services")
+    private String viewServicesPage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            model.addAttribute("services", workService.getAllWorks());
+            return "services";
+        } else {
+            return "redirect:/";
+        }
+    }
+
     @GetMapping("/add-work")
     private String showWorkAddForm(@RequestParam Long vehicleId,
                                    Model model, HttpServletRequest request) {
