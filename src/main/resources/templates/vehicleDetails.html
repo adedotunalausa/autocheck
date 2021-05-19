@@ -222,6 +222,53 @@
           </div>
 
         </div>
+
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="header">
+                <h4 class="title">Service History</h4>
+                <p class="description">Work done on the vehicle over time</p>
+              </div>
+              <div class="content table-responsive table-full-width">
+                <table class="table table-hover">
+                  <thead>
+                  <th>Type of Service</th>
+                  <th>Cost</th>
+                  <th>Is Completed?</th>
+                  <th>Is Paid For?</th>
+                  <th>Employee In Charge</th>
+                  <th>Date Created</th>
+                  </thead>
+                  <tbody>
+                  <tr th:if="${serviceHistory.size() > 0}" th:each="work : ${serviceHistory}">
+                    <td th:text="${work.typeOfService}"></td>
+                    <td th:text="${work.cost}"></td>
+                    <div th:switch="${work.isCompleted}">
+                      <td th:case="'1'">Yes</td>
+                      <td th:case="*">No</td>
+                    </div>
+                    <div th:switch="${work.isPaidFor}">
+                      <td th:case="'1'">Yes</td>
+                      <td th:case="*">No</td>
+                    </div>
+                    <td th:text="${work.employeeInCharge}"></td>
+                    <td th:text="${work.createdAt}"></td>
+                    <td class="td-actions text-right">
+                      <a rel="tooltip" title="View Service Details" class="btn btn-info btn-simple btn-xs" th:href="@{'/view-work?workId=' + ${work.workId}}">
+                        <i class="fa fa-info"></i>
+                      </a>
+                      <a rel="tooltip" title="Edit Service" class="btn btn-info btn-simple btn-xs" th:if="${session.userRole.equals('Admin')}" th:href="@{'/edit-work?workId=' + ${work.workId}}">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

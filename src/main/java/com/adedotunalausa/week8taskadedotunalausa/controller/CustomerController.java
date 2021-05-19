@@ -65,7 +65,7 @@ public class CustomerController {
     }
 
     @GetMapping("/view-customer")
-    private String showCustomerDetailsPage(@RequestParam Long customerId, Model model) {
+    private String showCustomerDetailsPage(@RequestParam Long customerId, Model model, HttpServletRequest request) {
         Customer currentCustomer = customerService.getCustomerById(customerId);
         List<Vehicle> currentCustomerVehicles = vehicleService.getAllVehiclesByCustomerId(customerId);
         model.addAttribute("currentCustomer", currentCustomer);

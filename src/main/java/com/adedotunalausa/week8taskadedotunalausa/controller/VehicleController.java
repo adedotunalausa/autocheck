@@ -2,9 +2,12 @@ package com.adedotunalausa.week8taskadedotunalausa.controller;
 
 import com.adedotunalausa.week8taskadedotunalausa.model.Customer;
 import com.adedotunalausa.week8taskadedotunalausa.model.Vehicle;
+import com.adedotunalausa.week8taskadedotunalausa.repository.WorkRepository;
 import com.adedotunalausa.week8taskadedotunalausa.service.CustomerService;
 import com.adedotunalausa.week8taskadedotunalausa.service.VehicleService;
+import com.adedotunalausa.week8taskadedotunalausa.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,9 @@ public class VehicleController {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private WorkService workService;
 
     @GetMapping("/vehicles")
     private String viewVehiclesPage(Model model, HttpServletRequest request) {
@@ -73,6 +79,7 @@ public class VehicleController {
             Vehicle currentVehicle = vehicleService.getVehicleById(vehicleId);
             model.addAttribute("currentVehicle", currentVehicle);
             model.addAttribute("currentVehicleOwner", currentVehicle.getCustomer());
+            model.addAttribute("serviceHistory", workService.getAllWorksByVehicleId(vehicleId));
             return "vehicleDetails";
         } else {
             return "redirect:/";

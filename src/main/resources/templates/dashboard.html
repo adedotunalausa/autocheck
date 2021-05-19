@@ -207,6 +207,7 @@
                                         <thead>
                                         <th>Type of Service</th>
                                         <th>Vehicle</th>
+                                        <th>Is Paid For?</th>
                                         <th>Employee In Charge</th>
                                         <th>Date Created</th>
                                         </thead>
@@ -214,6 +215,10 @@
                                         <tr th:if="${pendingServices.size() > 0}" th:each="work : ${pendingServices}">
                                             <td th:text="${work.typeOfService}"></td>
                                             <td th:text="${work.vehicle.manufacturer}"></td>
+                                            <div th:switch="${work.isPaidFor}">
+                                                <td th:case="'1'">Yes</td>
+                                                <td th:case="*">No</td>
+                                            </div>
                                             <td th:text="${work.employeeInCharge}"></td>
                                             <td th:text="${work.createdAt}"></td>
                                             <td class="td-actions text-right">
@@ -292,5 +297,19 @@
 <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 <script th:src="@{/js/light-bootstrap-dashboard.js?v=1.4.0}"></script>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $.notify({
+            icon: '<i class="fa fa-history">',
+            message: "Welcome to <b>AutoCheck Dashboard</b> - A management system for the company."
+
+        },{
+            type: 'success',
+            timer: 4000
+        });
+
+    });
+</script>
 
 </html>

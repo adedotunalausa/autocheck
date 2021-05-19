@@ -7,6 +7,7 @@ import java.util.List;
 public interface WorkService {
     void addWork(Work newWork);
     List<Work> getAllWorks();
+    List<Work> getAllWorksByVehicleId(Long vehicleId);
     List<Work> getAllPendingWorks();
     List<Work> getAllCompletedWorks();
     Work getWorkById(Long workId);

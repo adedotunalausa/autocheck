@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class WorkServiceImpl implements WorkService {
@@ -22,6 +23,14 @@ public class WorkServiceImpl implements WorkService {
     @Override
     public List<Work> getAllWorks() {
         return this.workRepository.findAllByIsDeletedEqualsOrderByCreatedAtDesc(0);
+    }
+
+    @Override
+    public List<Work> getAllWorksByVehicleId(Long vehicleId) {
+        List<Work> allWorks = this.workRepository.findAllByIsDeletedEqualsOrderByCreatedAtDesc(0);
+        return allWorks.stream()
+                .filter(x -> x.getVehicle().getVehicleId().equals(vehicleId))
+                .collect(Collectors.toList());
     }
 
     @Override

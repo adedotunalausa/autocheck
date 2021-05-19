@@ -125,6 +125,10 @@
                   <p class="description" th:text="${currentWork.workId}"></p>
                 </div>
                 <div style="display: flex; align-items: center">
+                  <p style="margin-right: 5px" class="description">Created By:</p>
+                  <p class="description" th:text="${author.firstname} + ' ' + ${author.lastname}"></p>
+                </div>
+                <div style="display: flex; align-items: center">
                   <p style="margin-right: 5px" class="description">Date Created:</p>
                   <p class="description" th:text="${currentWork.createdAt}"></p>
                 </div>
