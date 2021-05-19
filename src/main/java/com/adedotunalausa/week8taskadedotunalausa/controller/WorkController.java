@@ -60,6 +60,22 @@ public class WorkController {
         }
     }
 
+    @GetMapping("/view-work")
+    private String showWorkDetailsPage(@RequestParam Long workId, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            Work currentWork = workService.getWorkById(workId);
+            model.addAttribute("currentWork", currentWork);
+            model.addAttribute("author", currentWork.getCreatedBy());
+            model.addAttribute("vehicle", currentWork.getVehicle());
+            model.addAttribute("vehicleOwner", currentWork.getVehicle().getCustomer());
+            return "workDetails";
+        } else {
+            return "redirect:/";
+        }
+    }
+
     @PostMapping("/add-work")
     private String addWork(@ModelAttribute("newWork") Work work,
                            @ModelAttribute("currentVehicle") Vehicle currentVehicle, HttpServletRequest request) {
@@ -70,6 +86,38 @@ public class WorkController {
             work.setVehicle(currentVehicle);
             workService.addWork(work);
             return "redirect:/vehicles";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/edit-work")
+    private String showWorkEditForm(@RequestParam Long workId, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            List<Employee> employees = employeeService.getAllUsers();
+            Work currentWork = workService.getWorkById(workId);
+            model.addAttribute("employees", employees);
+            model.addAttribute("currentWork", currentWork);
+            return "workEditForm";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @PostMapping("/update-work")
+    private String updateWork(@ModelAttribute("currentWork") Work currentWork, Model model,
+                              HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            workService.updateWork(currentWork.getWorkId(), currentWork.getEmployeeInCharge(),
+                    currentWork.getTypeOfService(), currentWork.getCost(), currentWork.getCurrentMileage(),
+                    currentWork.getIsCompleted(), currentWork.getIsPaidFor());
+            Work work = workService.getWorkById(currentWork.getWorkId());
+            model.addAttribute("currentWork", work);
+            return "workEditForm";
         } else {
             return "redirect:/";
         }

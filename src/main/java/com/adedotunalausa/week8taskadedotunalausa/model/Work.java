@@ -39,5 +39,13 @@ public class Work {
     protected int isDeleted;
     protected Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
-
+    public Work(String employeeInCharge, String typeOfService, Double cost,
+                String currentMileage, int isCompleted, int isPaidFor) {
+        this.employeeInCharge = employeeInCharge;
+        this.typeOfService = typeOfService;
+        this.cost = cost;
+        this.currentMileage = currentMileage;
+        this.isCompleted = isCompleted;
+        this.isPaidFor = isPaidFor;
+    }
 }

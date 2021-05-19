@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface WorkRepository extends JpaRepository<Work, Long> {
     List<Work> findAllByIsDeletedEqualsOrderByCreatedAtDesc(int value);
+    List<Work> findAllByIsCompletedEqualsOrderByCreatedAtDesc(int value);
 }

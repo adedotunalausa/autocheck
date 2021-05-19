@@ -4,6 +4,7 @@ import com.adedotunalausa.week8taskadedotunalausa.model.Employee;
 import com.adedotunalausa.week8taskadedotunalausa.service.CustomerService;
 import com.adedotunalausa.week8taskadedotunalausa.service.EmployeeService;
 import com.adedotunalausa.week8taskadedotunalausa.service.VehicleService;
+import com.adedotunalausa.week8taskadedotunalausa.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,9 @@ public class EmployeeController {
     @Autowired
     private VehicleService vehicleService;
 
+    @Autowired
+    private WorkService workService;
+
     @GetMapping("/")
     public String viewAuthenticationPage(Model model) {
         Employee employee = new Employee();
@@ -40,6 +44,9 @@ public class EmployeeController {
         if (userId != null) {
             model.addAttribute("customers", customerService.getAllCustomers());
             model.addAttribute("vehicles", vehicleService.getAllVehicles());
+            model.addAttribute("services", workService.getAllWorks());
+            model.addAttribute("pendingServices", workService.getAllPendingWorks());
+            model.addAttribute("completedServices", workService.getAllCompletedWorks());
             return "dashboard";
         } else {
             return "redirect:/";

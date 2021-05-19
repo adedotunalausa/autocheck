@@ -135,7 +135,10 @@
                         <div class="card">
                             <div class="header">
                                 <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                <h4 style="color: #2b542c" class="title">1.426</h4>
+                                <div th:switch="${completedServices}">
+                                    <h4 style="color: #2b542c"  class="title" th:case="null">0</h4>
+                                    <h4 style="color: #2b542c"  class="title" th:case="*" th:text="${completedServices.size()}"></h4>
+                                </div>
                                 <p class="category">Completed Services</p>
                                 <div class="footer">
                                     <hr>
@@ -153,7 +156,10 @@
                         <div class="card">
                             <div class="header">
                                 <i class="fa fa-tasks" aria-hidden="true"></i>
-                                <h4 style="color: #810000" class="title">1.426</h4>
+                                <div th:switch="${pendingServices}">
+                                    <h4 style="color: #810000" class="title" th:case="null">0</h4>
+                                    <h4 style="color: #810000" class="title" th:case="*" th:text="${pendingServices.size()}"></h4>
+                                </div>
                                 <p class="category">Pending Services</p>
                                 <div class="footer">
                                     <hr>
@@ -198,39 +204,25 @@
                             <div class="content">
                                 <div class="table-full-width">
                                     <table class="table">
+                                        <thead>
+                                        <th>Type of Service</th>
+                                        <th>Vehicle</th>
+                                        <th>Employee In Charge</th>
+                                        <th>Date Created</th>
+                                        </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>
-                                                <button rel="tooltip" title="Mark As Completed" class="checkbox btn btn-info btn-simple btn-xs">
-                                                    <input id="checkbox1" type="checkbox">
-                                                    <label for="checkbox1"></label>
-                                                </button>
-                                            </td>
-                                            <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                        <tr th:if="${pendingServices.size() > 0}" th:each="work : ${pendingServices}">
+                                            <td th:text="${work.typeOfService}"></td>
+                                            <td th:text="${work.vehicle.manufacturer}"></td>
+                                            <td th:text="${work.employeeInCharge}"></td>
+                                            <td th:text="${work.createdAt}"></td>
                                             <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Service" class="btn btn-info btn-simple btn-xs">
+                                                <a th:href="@{'/view-work?workId=' + ${work.workId}}" rel="tooltip" title="View Service Details" class="btn btn-info btn-simple btn-xs">
+                                                    <i class="fa fa-info"></i>
+                                                </a>
+                                                <a th:if="${session.userRole.equals('Admin')}" th:href="@{'/edit-work?workId=' + ${work.workId}}" rel="tooltip" title="Edit Service" class="btn btn-info btn-simple btn-xs">
                                                     <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Delete" class="btn btn-danger btn-simple btn-xs">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <button rel="tooltip" title="Mark As Completed" class="checkbox btn btn-info btn-simple btn-xs">
-                                                    <input id="checkbox6" type="checkbox" checked>
-                                                    <label for="checkbox6"></label>
-                                                </button>
-                                            </td>
-                                            <td>Unfollow 5 enemies from twitter</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Service" class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>
                                         </tbody>

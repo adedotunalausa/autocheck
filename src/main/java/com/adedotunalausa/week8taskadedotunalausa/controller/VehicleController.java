@@ -4,7 +4,6 @@ import com.adedotunalausa.week8taskadedotunalausa.model.Customer;
 import com.adedotunalausa.week8taskadedotunalausa.model.Vehicle;
 import com.adedotunalausa.week8taskadedotunalausa.service.CustomerService;
 import com.adedotunalausa.week8taskadedotunalausa.service.VehicleService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 public class VehicleController {
@@ -39,7 +37,7 @@ public class VehicleController {
     }
 
     @GetMapping("/add-vehicle")
-    private String showVehicleAddForm(@RequestParam Long customerId,Model model, HttpServletRequest request) {
+    private String showVehicleAddForm(@RequestParam Long customerId, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
         if (userId != null) {
@@ -68,29 +66,47 @@ public class VehicleController {
     }
 
     @GetMapping("/view-vehicle")
-    private String showVehicleDetailsPage(@RequestParam Long vehicleId, Model model) {
-        Vehicle currentVehicle = vehicleService.getVehicleById(vehicleId);
-        model.addAttribute("currentVehicle", currentVehicle);
-        model.addAttribute("currentVehicleOwner", currentVehicle.getCustomer());
-        return "vehicleDetails";
+    private String showVehicleDetailsPage(@RequestParam Long vehicleId, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            Vehicle currentVehicle = vehicleService.getVehicleById(vehicleId);
+            model.addAttribute("currentVehicle", currentVehicle);
+            model.addAttribute("currentVehicleOwner", currentVehicle.getCustomer());
+            return "vehicleDetails";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/edit-vehicle")
-    private String showVehicleEditForm(@RequestParam Long vehicleId, Model model) {
-        Vehicle currentVehicle = vehicleService.getVehicleById(vehicleId);
-        model.addAttribute("currentVehicle", currentVehicle);
-        return "vehicleEditForm";
+    private String showVehicleEditForm(@RequestParam Long vehicleId, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            Vehicle currentVehicle = vehicleService.getVehicleById(vehicleId);
+            model.addAttribute("currentVehicle", currentVehicle);
+            return "vehicleEditForm";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/update-vehicle")
-    private String updateVehicle(@ModelAttribute("currentVehicle") Vehicle currentVehicle, Model model) {
-        vehicleService.updateVehicle(currentVehicle.getVehicleId(), currentVehicle.getManufacturer(),
-                currentVehicle.getModel(), currentVehicle.getColor(), currentVehicle.getYear(),
-                currentVehicle.getRegistrationNumber(), currentVehicle.getEngineNumber(),
-                currentVehicle.getChassisNumber(), currentVehicle.getCurrentMileage());
-        Vehicle vehicle = vehicleService.getVehicleById(currentVehicle.getVehicleId());
-        model.addAttribute("currentVehicle", vehicle);
-        return "vehicleEditForm";
+    private String updateVehicle(@ModelAttribute("currentVehicle") Vehicle currentVehicle, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            vehicleService.updateVehicle(currentVehicle.getVehicleId(), currentVehicle.getManufacturer(),
+                    currentVehicle.getModel(), currentVehicle.getColor(), currentVehicle.getYear(),
+                    currentVehicle.getRegistrationNumber(), currentVehicle.getEngineNumber(),
+                    currentVehicle.getChassisNumber(), currentVehicle.getCurrentMileage());
+            Vehicle vehicle = vehicleService.getVehicleById(currentVehicle.getVehicleId());
+            model.addAttribute("currentVehicle", vehicle);
+            return "vehicleEditForm";
+        } else {
+            return "redirect:/";
+        }
     }
 
 }
