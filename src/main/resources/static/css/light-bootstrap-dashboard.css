@@ -140,7 +140,7 @@ h1 .subtitle {
 }
 
 .text-success, .text-success:hover {
-    color: #87CB16 !important;
+    color: #2b542c !important;
 }
 
 .text-warning, .text-warning:hover {
@@ -1027,11 +1027,11 @@ fieldset[disabled] .btn-neutral.active {
 }
 
 .has-success .form-control {
-    color: #87CB16;
+    color: #2b542c;
 }
 
 .has-success .form-control:focus {
-    border-color: #87CB16;
+    border-color: #2b542c;
 }
 
 .has-error .form-control {
@@ -1067,7 +1067,7 @@ fieldset[disabled] .btn-neutral.active {
 }
 
 .has-success .form-control-feedback {
-    color: #87CB16;
+    color: #2b542c;
 }
 
 .input-group-addon {
@@ -1088,8 +1088,8 @@ fieldset[disabled] .btn-neutral.active {
 }
 
 .has-success .form-control:focus + .input-group-addon {
-    border-color: #87CB16;
-    color: #87CB16;
+    border-color: #2b542c;
+    color: #2b542c;
 }
 
 .form-control:focus + .input-group-addon,
@@ -1217,7 +1217,7 @@ fieldset[disabled] .btn-neutral.active {
 }
 
 .alert-success {
-    background-color: #a1e82c;
+    background-color: #2b542c;
 }
 
 .alert-warning {

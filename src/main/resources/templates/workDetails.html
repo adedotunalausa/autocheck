@@ -115,6 +115,7 @@
     <div class="content">
       <a th:href="@{/services}" class="btn btn-simple"><- Back to Services</a>
       <div class="container-fluid">
+      <a style="margin-bottom: 2rem" th:href="@{'/invoice?workId=' + ${currentWork.workId}}" class="btn btn-fill btn-success" target="_blank">Generate Invoice</a>
         <div class="row">
           <div class="col-md-8">
             <div class="card">
@@ -160,7 +161,10 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label>Is Paid For?</label>
-                        <input type="text" class="form-control" disabled placeholder="Is Paid For?" th:value="${currentWork.isPaidFor}">
+                        <div th:switch="${currentWork.isPaidFor}">
+                          <input type="text" class="form-control" disabled placeholder="Is Paid For?" th:case="'1'" th:value="Yes">
+                          <input type="text" class="form-control" disabled placeholder="Is Paid For?" th:case="*" th:value="No">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -175,7 +179,10 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label>Is Completed?</label>
-                        <input type="text" class="form-control" disabled placeholder="Is Completed?" th:value="${currentWork.isCompleted}">
+                        <div th:switch="${currentWork.isCompleted}">
+                          <input type="text" class="form-control" disabled placeholder="Is Completed?" th:case="'1'" th:value="Yes">
+                          <input type="text" class="form-control" disabled placeholder="Is Completed?" th:case="*" th:value="No">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -204,7 +211,7 @@
               </div>
 
               <div class="header">
-                <h4>Vehicle Owner: </h4>
+                <h4>Customer: </h4>
                 <div style="display: flex; align-items: center" class="text-center">
                   <h4 style="margin-right: 5px" class="title" th:text="${vehicleOwner.firstname}"></h4>
                   <h4 class="title" th:text="${vehicleOwner.lastname}"></h4>

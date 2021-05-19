@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>AutoCheck | Service Invoice</title>
+
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, employee-scalable=0' name='viewport' />
+  <meta name="viewport" content="width=device-width" />
+
+  <link th:href="@{/css/invoice.css}" rel="stylesheet" />
+
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+
+<div>
+  <div>
+    <h3 class="title">Service Invoice</h3>
+    <div class="flex-row-center" style="display: flex; align-items: center">
+      <p style="margin-right: 5px" class="description">Service Date:</p>
+      <p class="description" th:text="${currentWork.createdAt}"></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <h4 style="margin-right: 5px">Vehicle: </h4>
+      <div class="flex-row-center">
+        <h4 class="title" style="margin-right: 5px" th:text="${vehicle.manufacturer}"></h4>
+        <h4 class="title" th:text="${vehicle.model}"></h4>
+      </div>
+      <p class="description" th:text="${vehicle.year}"></p>
+      <p class="description" th:text="${vehicle.color}"></p>
+      <p class="description" th:text="${vehicle.registrationNumber}"></p>
+    </div>
+
+    <div>
+      <h4>Customer: </h4>
+      <div class="flex-row-center">
+        <h4 class="title" style="margin-right: 5px" th:text="${vehicleOwner.firstname}"></h4>
+        <h4 class="title" th:text="${vehicleOwner.lastname}"></h4>
+      </div>
+      <p class="description" th:text="${vehicleOwner.occupation}"></p>
+      <p class="description" th:text="${vehicleOwner.email}"></p>
+      <p class="description" th:text="${vehicleOwner.phoneNo}"></p>
+    </div>
+  </div>
+
+  <div style="margin-top: 3rem">
+    <div>
+      <h3 class="title">Type of Service</h3>
+      <p class="description" th:text="${currentWork.typeOfService}"></p>
+    </div>
+
+    <div class="row">
+      <div>
+        <h4 class="title">Current Mileage</h4>
+        <p class="description" th:text="${currentWork.currentMileage}"></p>
+      </div>
+      <div>
+        <h4 class="title">Cost</h4>
+        <p class="description" th:text="${currentWork.cost}"></p>
+      </div>
+      <div>
+        <h4 class="title">Is Paid For?</h4>
+        <p class="description" th:text="${currentWork.isPaidFor}"></p>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <h4 class="title">Employee In Charge</h4>
+        <p class="description" th:text="${currentWork.employeeInCharge}"></p>
+      </div>
+      <div>
+        <h4 class="title">Is Completed?</h4>
+        <p class="description" th:text="${currentWork.isCompleted}"></p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

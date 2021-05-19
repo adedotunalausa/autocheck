@@ -6,16 +6,21 @@ import com.adedotunalausa.week8taskadedotunalausa.model.Work;
 import com.adedotunalausa.week8taskadedotunalausa.service.EmployeeService;
 import com.adedotunalausa.week8taskadedotunalausa.service.VehicleService;
 import com.adedotunalausa.week8taskadedotunalausa.service.WorkService;
+import com.itextpdf.html2pdf.ConverterProperties;
+import com.itextpdf.html2pdf.HtmlConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.context.WebContext;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 @Controller
@@ -29,6 +34,9 @@ public class WorkController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private SpringTemplateEngine templateEngine;
 
     @GetMapping("/services")
     private String viewServicesPage(Model model, HttpServletRequest request) {
@@ -74,6 +82,31 @@ public class WorkController {
         } else {
             return "redirect:/";
         }
+    }
+
+    @GetMapping("/invoice")
+    public ResponseEntity<?> getPDF(@RequestParam Long workId, HttpServletRequest request, HttpServletResponse response){
+        Work currentWork = workService.getWorkById(workId);
+
+        WebContext context = new WebContext(request, response, request.getServletContext());
+        context.setVariable("currentWork", currentWork);
+        context.setVariable("author", currentWork.getCreatedBy());
+        context.setVariable("vehicle", currentWork.getVehicle());
+        context.setVariable("vehicleOwner", currentWork.getVehicle().getCustomer());
+        String invoiceHtml = templateEngine.process("serviceInvoice", context);
+
+        ByteArrayOutputStream target = new ByteArrayOutputStream();
+
+        ConverterProperties converterProperties = new ConverterProperties();
+        converterProperties.setBaseUri("http://localhost:6040");
+
+        HtmlConverter.convertToPdf(invoiceHtml, target, converterProperties);
+
+        byte[] bytes = target.toByteArray();
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(bytes);
     }
 
     @PostMapping("/add-work")
