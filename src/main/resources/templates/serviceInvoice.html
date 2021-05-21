@@ -67,7 +67,10 @@
       </div>
       <div>
         <h4 class="title">Is Paid For?</h4>
-        <p class="description" th:text="${currentWork.isPaidFor}"></p>
+        <div th:switch="${currentWork.isPaidFor}">
+          <p class="description" th:case="'1'">Yes</p>
+          <p class="description" th:case="*">No</p>
+        </div>
       </div>
     </div>
 
@@ -78,7 +81,10 @@
       </div>
       <div>
         <h4 class="title">Is Completed?</h4>
-        <p class="description" th:text="${currentWork.isCompleted}"></p>
+        <div th:switch="${currentWork.isCompleted}">
+          <p class="description" th:case="'1'">Yes</p>
+          <p class="description" th:case="*">No</p>
+        </div>
       </div>
     </div>
   </div>

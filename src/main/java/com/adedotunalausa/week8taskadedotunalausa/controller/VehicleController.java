@@ -2,12 +2,10 @@ package com.adedotunalausa.week8taskadedotunalausa.controller;
 
 import com.adedotunalausa.week8taskadedotunalausa.model.Customer;
 import com.adedotunalausa.week8taskadedotunalausa.model.Vehicle;
-import com.adedotunalausa.week8taskadedotunalausa.repository.WorkRepository;
 import com.adedotunalausa.week8taskadedotunalausa.service.CustomerService;
 import com.adedotunalausa.week8taskadedotunalausa.service.VehicleService;
 import com.adedotunalausa.week8taskadedotunalausa.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +34,9 @@ public class VehicleController {
         Long userId = (Long) session.getAttribute("userId");
         if (userId != null) {
             model.addAttribute("vehicles", vehicleService.getAllVehicles());
+            model.addAttribute("link_name", "Vehicles");
+            model.addAttribute("page_link", "/vehicles");
+            model.addAttribute("vehicles_active", "active");
             return "vehicles";
         } else {
             return "redirect:/";
@@ -51,6 +52,9 @@ public class VehicleController {
             Vehicle newVehicle = new Vehicle();
             model.addAttribute("currentCustomer", currentCustomer);
             model.addAttribute("newVehicle", newVehicle);
+            model.addAttribute("link_name", "Vehicles");
+            model.addAttribute("page_link", "/vehicles");
+            model.addAttribute("vehicles_active", "active");
             return "vehicleAddForm";
         } else {
             return "redirect:/";
@@ -58,13 +62,17 @@ public class VehicleController {
     }
 
     @PostMapping("/add-vehicle")
-    private String addVehicleToCustomer(@ModelAttribute("newVehicle") Vehicle newVehicle,
-                                        @ModelAttribute("currentCustomer") Customer currentCustomer, HttpServletRequest request) {
+    private String addVehicleToCustomer(@ModelAttribute("newVehicle") Vehicle newVehicle, Model model,
+                                        @ModelAttribute("currentCustomer") Customer currentCustomer,
+                                        HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
         if (userId != null) {
             newVehicle.setCustomer(currentCustomer);
             vehicleService.addVehicle(newVehicle);
+            model.addAttribute("link_name", "Vehicles");
+            model.addAttribute("page_link", "/vehicles");
+            model.addAttribute("vehicles_active", "active");
             return "redirect:/customers";
         } else {
             return "redirect:/";
@@ -80,6 +88,9 @@ public class VehicleController {
             model.addAttribute("currentVehicle", currentVehicle);
             model.addAttribute("currentVehicleOwner", currentVehicle.getCustomer());
             model.addAttribute("serviceHistory", workService.getAllWorksByVehicleId(vehicleId));
+            model.addAttribute("link_name", "Vehicles");
+            model.addAttribute("page_link", "/vehicles");
+            model.addAttribute("vehicles_active", "active");
             return "vehicleDetails";
         } else {
             return "redirect:/";
@@ -93,6 +104,9 @@ public class VehicleController {
         if (userId != null) {
             Vehicle currentVehicle = vehicleService.getVehicleById(vehicleId);
             model.addAttribute("currentVehicle", currentVehicle);
+            model.addAttribute("link_name", "Vehicles");
+            model.addAttribute("page_link", "/vehicles");
+            model.addAttribute("vehicles_active", "active");
             return "vehicleEditForm";
         } else {
             return "redirect:/";
@@ -100,7 +114,8 @@ public class VehicleController {
     }
 
     @PostMapping("/update-vehicle")
-    private String updateVehicle(@ModelAttribute("currentVehicle") Vehicle currentVehicle, Model model, HttpServletRequest request) {
+    private String updateVehicle(@ModelAttribute("currentVehicle") Vehicle currentVehicle, Model model,
+                                 HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
         if (userId != null) {
@@ -110,6 +125,9 @@ public class VehicleController {
                     currentVehicle.getChassisNumber(), currentVehicle.getCurrentMileage());
             Vehicle vehicle = vehicleService.getVehicleById(currentVehicle.getVehicleId());
             model.addAttribute("currentVehicle", vehicle);
+            model.addAttribute("link_name", "Vehicles");
+            model.addAttribute("page_link", "/vehicles");
+            model.addAttribute("vehicles_active", "active");
             return "vehicleEditForm";
         } else {
             return "redirect:/";

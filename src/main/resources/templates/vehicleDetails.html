@@ -31,86 +31,10 @@
 <body>
 
 <div class="wrapper">
-  <div class="sidebar" data-color="purple" th:data-image="@{/images/sidebar-2.jpg}">
-
-    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
-
-
-    <div class="sidebar-wrapper">
-      <div class="logo">
-        <a th:href="@{/dashboard}" class="simple-text">
-          AutoCheck
-        </a>
-      </div>
-
-      <ul class="nav">
-        <li>
-          <a th:href="@{/dashboard}">
-            <i class="fa fa-dashboard" aria-hidden="true"></i>
-            <p>Dashboard</p>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/services}">
-            <i class="fa fa-wrench" aria-hidden="true"></i>
-            <p>Services</p>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/customers}">
-            <i class="fa fa-users" aria-hidden="true"></i>
-            <p>Customers</p>
-          </a>
-        </li>
-        <li class="active">
-          <a th:href="@{/vehicles}">
-            <i class="fa fa-car" aria-hidden="true"></i>
-            <p>Vehicles</p>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/staff}">
-            <i class="fa fa-users" aria-hidden="true"></i>
-            <p>Staff</p>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <div class="sidebar" data-color="purple"  th:data-image="@{/images/sidebar-2.jpg}" th:replace="fragments/sideBar :: sideBar"></div>
 
   <div class="main-panel">
-    <nav class="navbar navbar-default navbar-fixed">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" th:href="@{/vehicles}">Vehicles</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <div style="display: flex; align-items: center">
-                  <p th:if="${session.containsKey('userFirstname')}" th:text="${session.userFirstname}"></p>
-                  <b class="caret"></b>
-                </div>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Profile</a></li>
-                <li th:if="${session.userRole.equals('Admin')}"><a th:href="@{/add-employee}">Add Employee</a></li>
-                <li class="divider"></li>
-                <li><a th:href="@{/sign-out}">Sign out</a></li>
-              </ul>
-            </li>
-            <li class="separator hidden-lg"></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <nav class="navbar navbar-default navbar-fixed" th:replace="fragments/navBar :: navBar"></nav>
 
     <div class="content">
       <a th:href="@{/vehicles}" class="btn btn-simple"><- Back to Vehicles</a>
@@ -134,14 +58,14 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Manufacturer</label>
-                        <input type="text" class="form-control" disabled placeholder="Manufacturer" th:value="${currentVehicle.manufacturer}">
+                        <label for="manufacturer">Manufacturer</label>
+                        <input id="manufacturer" type="text" class="form-control" disabled placeholder="Manufacturer" th:value="${currentVehicle.manufacturer}">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Model</label>
-                        <input type="text" class="form-control" disabled placeholder="Model" th:value="${currentVehicle.model}">
+                        <label for="model">Model</label>
+                        <input id="model" type="text" class="form-control" disabled placeholder="Model" th:value="${currentVehicle.model}">
                       </div>
                     </div>
                   </div>
@@ -149,20 +73,20 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>Color</label>
-                        <input type="text" class="form-control" disabled placeholder="Color" th:value="${currentVehicle.color}">
+                        <label for="color">Color</label>
+                        <input id="color" type="text" class="form-control" disabled placeholder="Color" th:value="${currentVehicle.color}">
                       </div>
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label>Year</label>
-                        <input type="number" class="form-control" disabled placeholder="Year" th:value="${currentVehicle.year}">
+                        <label for="year">Year</label>
+                        <input id="year" type="number" class="form-control" disabled placeholder="Year" th:value="${currentVehicle.year}">
                       </div>
                     </div>
                     <div class="col-md-5">
                       <div class="form-group">
-                        <label>Mileage</label>
-                        <input type="number" class="form-control" disabled placeholder="Mileage" th:value="${currentVehicle.currentMileage}">
+                        <label for="mileage">Mileage</label>
+                        <input id="mileage" type="number" class="form-control" disabled placeholder="Mileage" th:value="${currentVehicle.currentMileage}">
                       </div>
                     </div>
                   </div>
@@ -170,14 +94,14 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Chassis Number</label>
-                        <input type="text" class="form-control" disabled placeholder="Chassis Number" th:value="${currentVehicle.chassisNumber}">
+                        <label for="chassis-number">Chassis Number</label>
+                        <input id="chassis-number" type="text" class="form-control" disabled placeholder="Chassis Number" th:value="${currentVehicle.chassisNumber}">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Registration Number</label>
-                        <input type="text" class="form-control" disabled placeholder="Registration Number" th:value="${currentVehicle.registrationNumber}">
+                        <label for="registration-number">Registration Number</label>
+                        <input id="registration-number" type="text" class="form-control" disabled placeholder="Registration Number" th:value="${currentVehicle.registrationNumber}">
                       </div>
                     </div>
                   </div>
@@ -185,8 +109,8 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label>Engine Number</label>
-                        <input type="text" class="form-control" disabled placeholder="Engine Number" th:value="${currentVehicle.engineNumber}">
+                        <label for="engine-number">Engine Number</label>
+                        <input id="engine-number" type="text" class="form-control" disabled placeholder="Engine Number" th:value="${currentVehicle.engineNumber}">
                       </div>
                     </div>
                   </div>
@@ -272,32 +196,7 @@
       </div>
     </div>
 
-    <footer class="footer">
-      <div class="container-fluid">
-        <nav class="pull-left">
-          <ul>
-            <li>
-              <a th:href="@{/dashboard}">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                Support
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                Documentation
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <p class="copyright pull-right">
-          &copy; <script>document.write(new Date().getFullYear())</script> <a th:href="@{/dashboard}">AutoCheck</a>
-        </p>
-      </div>
-    </footer>
+    <footer th:replace="fragments/footer:: footer" class="footer"></footer>
 
 
   </div>

@@ -1,0 +1,48 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div class="sidebar" data-color="purple" th:data-image="@{/images/sidebar-2.jpg}" th:fragment="sideBar">
+
+  <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+
+
+  <div class="sidebar-wrapper">
+    <div class="logo">
+      <a th:href="@{/dashboard}" class="simple-text">
+        AutoCheck
+      </a>
+    </div>
+
+    <ul class="nav">
+      <li th:class="@{${dashboard_active}}">
+        <a th:href="@{/dashboard}">
+          <i class="fa fa-dashboard" aria-hidden="true"></i>
+          <p>Dashboard</p>
+        </a>
+      </li>
+      <li th:class="@{${work_active}}">
+        <a th:href="@{/services}">
+          <i class="fa fa-wrench" aria-hidden="true"></i>
+          <p>Services</p>
+        </a>
+      </li>
+      <li th:class="@{${customer_active}}">
+        <a th:href="@{/customers}">
+          <i class="fa fa-users" aria-hidden="true"></i>
+          <p>Customers</p>
+        </a>
+      </li>
+      <li th:class="@{${vehicles_active}}">
+        <a th:href="@{/vehicles}">
+          <i class="fa fa-car" aria-hidden="true"></i>
+          <p>Vehicles</p>
+        </a>
+      </li>
+      <li th:class="@{${employee_active}}">
+        <a th:href="@{/staff}">
+          <i class="fa fa-users" aria-hidden="true"></i>
+          <p>Staff</p>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+</html>

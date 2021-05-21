@@ -33,6 +33,9 @@ public class CustomerController {
             Customer newCustomer = new Customer();
             model.addAttribute("newCustomer", newCustomer);
             model.addAttribute("customers", customerService.getAllCustomers());
+            model.addAttribute("link_name", "Customers"); // this is for the navbar css style in thymeleaf
+            model.addAttribute("page_link", "/customers"); // this is for the navbar css style in thymeleaf
+            model.addAttribute("customer_active", "active"); // this is for the sidebar css style in thymeleaf
             return "customers";
         } else {
             return "redirect:/";
@@ -46,6 +49,9 @@ public class CustomerController {
         if (userId != null) {
             Customer newCustomer = new Customer();
             model.addAttribute("newCustomer", newCustomer);
+            model.addAttribute("link_name", "Customers");
+            model.addAttribute("page_link", "/customers");
+            model.addAttribute("customer_active", "active");
             return "customerAddForm";
         } else {
             return "redirect:/";
@@ -53,11 +59,14 @@ public class CustomerController {
     }
 
     @PostMapping("/add-customer")
-    private String addCustomer(@ModelAttribute("newCustomer") Customer newCustomer, HttpServletRequest request) {
+    private String addCustomer(@ModelAttribute("newCustomer") Customer newCustomer, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
         if (userId != null) {
             customerService.addCustomer(newCustomer);
+            model.addAttribute("link_name", "Customers");
+            model.addAttribute("page_link", "/customers");
+            model.addAttribute("customer_active", "active");
             return "redirect:/customers";
         } else {
             return "redirect:/";
@@ -66,29 +75,56 @@ public class CustomerController {
 
     @GetMapping("/view-customer")
     private String showCustomerDetailsPage(@RequestParam Long customerId, Model model, HttpServletRequest request) {
-        Customer currentCustomer = customerService.getCustomerById(customerId);
-        List<Vehicle> currentCustomerVehicles = vehicleService.getAllVehiclesByCustomerId(customerId);
-        model.addAttribute("currentCustomer", currentCustomer);
-        model.addAttribute("currentCustomerVehicles", currentCustomerVehicles);
-        return "customerDetails";
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            Customer currentCustomer = customerService.getCustomerById(customerId);
+            List<Vehicle> currentCustomerVehicles = vehicleService.getAllVehiclesByCustomerId(customerId);
+            model.addAttribute("currentCustomer", currentCustomer);
+            model.addAttribute("currentCustomerVehicles", currentCustomerVehicles);
+            model.addAttribute("link_name", "Customers");
+            model.addAttribute("page_link", "/customers");
+            model.addAttribute("customer_active", "active");
+            return "customerDetails";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/edit-customer")
-    private String showCustomerEditForm(@RequestParam Long customerId, Model model) {
-        Customer currentCustomer = customerService.getCustomerById(customerId);
-        model.addAttribute("currentCustomer", currentCustomer);
-        return "customerEditForm";
+    private String showCustomerEditForm(@RequestParam Long customerId, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            Customer currentCustomer = customerService.getCustomerById(customerId);
+            model.addAttribute("currentCustomer", currentCustomer);
+            model.addAttribute("link_name", "Customers");
+            model.addAttribute("page_link", "/customers");
+            model.addAttribute("customer_active", "active");
+            return "customerEditForm";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/update-customer")
-    private String updateCustomer(@ModelAttribute("currentCustomer") Customer currentCustomer, Model model) {
-        customerService.updateCustomer(currentCustomer.getCustomerId(), currentCustomer.getFirstname(),
-                currentCustomer.getLastname(), currentCustomer.getGender(), currentCustomer.getOccupation(),
-                currentCustomer.getAddress(), currentCustomer.getCity(), currentCustomer.getState(),
-                currentCustomer.getEmail(), currentCustomer.getPhoneNo());
-        Customer customer = customerService.getCustomerById(currentCustomer.getCustomerId());
-        model.addAttribute("currentCustomer", customer);
-        return "customerEditForm";
+    private String updateCustomer(@ModelAttribute("currentCustomer") Customer currentCustomer, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            customerService.updateCustomer(currentCustomer.getCustomerId(), currentCustomer.getFirstname(),
+                    currentCustomer.getLastname(), currentCustomer.getGender(), currentCustomer.getOccupation(),
+                    currentCustomer.getAddress(), currentCustomer.getCity(), currentCustomer.getState(),
+                    currentCustomer.getEmail(), currentCustomer.getPhoneNo());
+            Customer customer = customerService.getCustomerById(currentCustomer.getCustomerId());
+            model.addAttribute("currentCustomer", customer);
+            model.addAttribute("link_name", "Customers");
+            model.addAttribute("page_link", "/customers");
+            model.addAttribute("customer_active", "active");
+            return "customerEditForm";
+        } else {
+            return "redirect:/";
+        }
     }
 
 

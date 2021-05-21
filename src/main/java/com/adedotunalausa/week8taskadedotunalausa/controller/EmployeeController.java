@@ -47,6 +47,9 @@ public class EmployeeController {
             model.addAttribute("services", workService.getAllWorks());
             model.addAttribute("pendingServices", workService.getAllPendingWorks());
             model.addAttribute("completedServices", workService.getAllCompletedWorks());
+            model.addAttribute("link_name", "Dashboard");
+            model.addAttribute("page_link", "/dashboard");
+            model.addAttribute("dashboard_active", "active");
             return "dashboard";
         } else {
             return "redirect:/";
@@ -60,6 +63,9 @@ public class EmployeeController {
         if (userId != null) {
             Employee newEmployee = new Employee();
             model.addAttribute("newEmployee", newEmployee);
+            model.addAttribute("link_name", "Staff");
+            model.addAttribute("page_link", "/staff");
+            model.addAttribute("employee_active", "active");
             return "employeeAddForm";
         } else {
             return "redirect:/";
@@ -67,11 +73,14 @@ public class EmployeeController {
     }
 
     @PostMapping("/add-employee")
-    private String addEmployee(@ModelAttribute("staff") Employee newEmployee, HttpServletRequest request) {
+    private String addEmployee(@ModelAttribute("staff") Employee newEmployee, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
         if (userId != null) {
             employeeService.addUser(newEmployee);
+            model.addAttribute("link_name", "Staff");
+            model.addAttribute("page_link", "/staff");
+            model.addAttribute("employee_active", "active");
             return "redirect:/staff";
         } else {
             return "redirect:/";
@@ -84,6 +93,9 @@ public class EmployeeController {
         Long userId = (Long) session.getAttribute("userId");
         if (userId != null) {
             model.addAttribute("staff", employeeService.getAllUsers());
+            model.addAttribute("link_name", "Staff");
+            model.addAttribute("page_link", "/staff");
+            model.addAttribute("employee_active", "active");
             return "staff";
         } else {
             return "redirect:/";

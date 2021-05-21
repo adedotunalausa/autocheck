@@ -44,6 +44,9 @@ public class WorkController {
         Long userId = (Long) session.getAttribute("userId");
         if (userId != null) {
             model.addAttribute("services", workService.getAllWorks());
+            model.addAttribute("link_name", "Services");
+            model.addAttribute("page_link", "/services");
+            model.addAttribute("work_active", "active");
             return "services";
         } else {
             return "redirect:/";
@@ -62,6 +65,9 @@ public class WorkController {
             model.addAttribute("employees", employees);
             model.addAttribute("currentVehicle", currentVehicle);
             model.addAttribute("newWork", newWork);
+            model.addAttribute("link_name", "Services");
+            model.addAttribute("page_link", "/services");
+            model.addAttribute("work_active", "active");
             return "workAddForm";
         } else {
             return "redirect:/";
@@ -78,6 +84,9 @@ public class WorkController {
             model.addAttribute("author", currentWork.getCreatedBy());
             model.addAttribute("vehicle", currentWork.getVehicle());
             model.addAttribute("vehicleOwner", currentWork.getVehicle().getCustomer());
+            model.addAttribute("link_name", "Services");
+            model.addAttribute("page_link", "/services");
+            model.addAttribute("work_active", "active");
             return "workDetails";
         } else {
             return "redirect:/";
@@ -110,7 +119,7 @@ public class WorkController {
     }
 
     @PostMapping("/add-work")
-    private String addWork(@ModelAttribute("newWork") Work work,
+    private String addWork(@ModelAttribute("newWork") Work work, Model model,
                            @ModelAttribute("currentVehicle") Vehicle currentVehicle, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
@@ -118,6 +127,9 @@ public class WorkController {
             work.setCreatedBy(employeeService.getUserById(userId));
             work.setVehicle(currentVehicle);
             workService.addWork(work);
+            model.addAttribute("link_name", "Services");
+            model.addAttribute("page_link", "/services");
+            model.addAttribute("work_active", "active");
             return "redirect:/vehicles";
         } else {
             return "redirect:/";
@@ -133,6 +145,9 @@ public class WorkController {
             Work currentWork = workService.getWorkById(workId);
             model.addAttribute("employees", employees);
             model.addAttribute("currentWork", currentWork);
+            model.addAttribute("link_name", "Services");
+            model.addAttribute("page_link", "/services");
+            model.addAttribute("work_active", "active");
             return "workEditForm";
         } else {
             return "redirect:/";
@@ -150,6 +165,9 @@ public class WorkController {
                     currentWork.getIsCompleted(), currentWork.getIsPaidFor());
             Work work = workService.getWorkById(currentWork.getWorkId());
             model.addAttribute("currentWork", work);
+            model.addAttribute("link_name", "Services");
+            model.addAttribute("page_link", "/services");
+            model.addAttribute("work_active", "active");
             return "workEditForm";
         } else {
             return "redirect:/";
