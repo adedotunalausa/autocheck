@@ -1,4 +1,4 @@
-package com.adedotunalausa.week8taskadedotunalausa.model;
+package com.adedotunalausa.autocheck.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

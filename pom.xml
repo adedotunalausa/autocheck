@@ -9,9 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.adedotunalausa</groupId>
-    <artifactId>week-8-task-adedotunalausa</artifactId>
+    <artifactId>auto-check-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>week-8-task-adedotunalausa</name>
+    <packaging>jar</packaging>
+    <name>auto-check-app</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
@@ -64,6 +65,7 @@
     </dependencies>
 
     <build>
+        <finalName>AutoCheck-app</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

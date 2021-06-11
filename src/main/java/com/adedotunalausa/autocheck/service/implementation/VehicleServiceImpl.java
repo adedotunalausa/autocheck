@@ -1,10 +1,9 @@
-package com.adedotunalausa.week8taskadedotunalausa.service.implementation;
+package com.adedotunalausa.autocheck.service.implementation;
 
-import com.adedotunalausa.week8taskadedotunalausa.model.Vehicle;
-import com.adedotunalausa.week8taskadedotunalausa.repository.VehicleRepository;
-import com.adedotunalausa.week8taskadedotunalausa.service.VehicleService;
+import com.adedotunalausa.autocheck.model.Vehicle;
+import com.adedotunalausa.autocheck.repository.VehicleRepository;
+import com.adedotunalausa.autocheck.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

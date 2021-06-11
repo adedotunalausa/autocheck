@@ -1,6 +1,6 @@
-package com.adedotunalausa.week8taskadedotunalausa.repository;
+package com.adedotunalausa.autocheck.repository;
 
-import com.adedotunalausa.week8taskadedotunalausa.model.Customer;
+import com.adedotunalausa.autocheck.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

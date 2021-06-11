@@ -1,11 +1,11 @@
-package com.adedotunalausa.week8taskadedotunalausa.controller;
+package com.adedotunalausa.autocheck.controller;
 
-import com.adedotunalausa.week8taskadedotunalausa.model.Employee;
-import com.adedotunalausa.week8taskadedotunalausa.model.Vehicle;
-import com.adedotunalausa.week8taskadedotunalausa.model.Work;
-import com.adedotunalausa.week8taskadedotunalausa.service.EmployeeService;
-import com.adedotunalausa.week8taskadedotunalausa.service.VehicleService;
-import com.adedotunalausa.week8taskadedotunalausa.service.WorkService;
+import com.adedotunalausa.autocheck.model.Employee;
+import com.adedotunalausa.autocheck.model.Vehicle;
+import com.adedotunalausa.autocheck.model.Work;
+import com.adedotunalausa.autocheck.service.EmployeeService;
+import com.adedotunalausa.autocheck.service.VehicleService;
+import com.adedotunalausa.autocheck.service.WorkService;
 import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
 import org.springframework.beans.factory.annotation.Autowired;

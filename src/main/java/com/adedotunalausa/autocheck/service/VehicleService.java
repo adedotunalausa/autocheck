@@ -1,9 +1,7 @@
-package com.adedotunalausa.week8taskadedotunalausa.service;
+package com.adedotunalausa.autocheck.service;
 
-import com.adedotunalausa.week8taskadedotunalausa.model.Vehicle;
-import org.springframework.data.domain.PageRequest;
+import com.adedotunalausa.autocheck.model.Vehicle;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface VehicleService {

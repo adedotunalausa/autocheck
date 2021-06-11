@@ -1,8 +1,8 @@
-package com.adedotunalausa.week8taskadedotunalausa.service.implementation;
+package com.adedotunalausa.autocheck.service.implementation;
 
-import com.adedotunalausa.week8taskadedotunalausa.model.Work;
-import com.adedotunalausa.week8taskadedotunalausa.repository.WorkRepository;
-import com.adedotunalausa.week8taskadedotunalausa.service.WorkService;
+import com.adedotunalausa.autocheck.model.Work;
+import com.adedotunalausa.autocheck.repository.WorkRepository;
+import com.adedotunalausa.autocheck.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

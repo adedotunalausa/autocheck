@@ -1,9 +1,9 @@
-package com.adedotunalausa.week8taskadedotunalausa.controller;
+package com.adedotunalausa.autocheck.controller;
 
-import com.adedotunalausa.week8taskadedotunalausa.model.Customer;
-import com.adedotunalausa.week8taskadedotunalausa.model.Vehicle;
-import com.adedotunalausa.week8taskadedotunalausa.service.CustomerService;
-import com.adedotunalausa.week8taskadedotunalausa.service.VehicleService;
+import com.adedotunalausa.autocheck.model.Customer;
+import com.adedotunalausa.autocheck.model.Vehicle;
+import com.adedotunalausa.autocheck.service.CustomerService;
+import com.adedotunalausa.autocheck.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

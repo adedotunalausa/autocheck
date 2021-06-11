@@ -1,6 +1,6 @@
-package com.adedotunalausa.week8taskadedotunalausa.service;
+package com.adedotunalausa.autocheck.service;
 
-import com.adedotunalausa.week8taskadedotunalausa.model.Customer;
+import com.adedotunalausa.autocheck.model.Customer;
 
 import java.util.List;
 
